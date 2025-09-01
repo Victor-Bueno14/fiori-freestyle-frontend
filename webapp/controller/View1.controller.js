@@ -6,9 +6,9 @@ sap.ui.define([
     return Controller.extend("zov.controller.View1", {
         onInit() {
         },
-        onPress() {
+        onPress(event) {
 
-            alert("Olá, Mundo!");
+            alert("O " + event.mParameters.id + " foi pressionado!");
 
         }
     });
