@@ -17,6 +17,6 @@
                  class="sapUiTinyMargin"
             />
             
-            <Button type="Emphasized" text="Exibir Mensagem" press="onPress" />
+            <Button type="Emphasized" text="{i18n>displayMsg}" press="onPress" />
     </Page>
 </mvc:View>
