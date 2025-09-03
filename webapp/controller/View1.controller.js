@@ -7,25 +7,25 @@ sap.ui.define([
     return Controller.extend("zov.controller.View1", {
         //Métodos do framework[->]
         onInit() {
+
+            let oView = this.getView();
+            let oModel = new sap.ui.model.json.JSONModel();
+
+            oModel.setData({"usuario": {"nome": "Victor"}});
+            oView.setModel(oModel);
+
         },
         //Métodos do framework[<-]
-        onCalcular() {
-            const oView = this.getView();
-            const fB1 = parseFloat(oView.byId("b1").getValue());
-            const fB2 = parseFloat(oView.byId("b2").getValue());
-            const fB3 = parseFloat(oView.byId("b3").getValue());
-            const fB4 = parseFloat(oView.byId("b4").getValue());
-            let fResultado = 0;
+        onPress() {
 
-            fResultado = (fB1 + fB2 + fB3 + fB4) / 4;
+            let oI18n = this.getView().getModel("i18n").getResourceBundle();
+            let oModel = this.getView().getModel();
+            let oData = oModel.getData();
 
-            oView.byId("resultado").setValue(fResultado);
+            let sText = oI18n.getText("welcomeMsg", [oData.usuario.nome]);
 
-            //Sem declarar a depedência.
-            //sap.m.MessageToast.show("Resultado: " + fResultado);
+            MessageToast.show(sText);
 
-            //Declarando a depedência. 
-            MessageToast.show("Resultado: " + fResultado);
         }
     });
 });
