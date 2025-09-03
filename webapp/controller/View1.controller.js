@@ -9,28 +9,54 @@ sap.ui.define([
         onInit() {
 
             let oView = this.getView();
-            let oModel = new sap.ui.model.json.JSONModel();
 
-            oModel.setData({
-                "usuario": {
-                    "nome": "Victor",
-                    "mensagens": 3
-                }
-            });
+            //Model padrão da View
+            // let oModel = new sap.ui.model.json.JSONModel();
 
-            oView.setModel(oModel);
+            // oModel.setData({"usuario": {"nome": "Victor"}});
+            // oView.setModel(oModel);
+
+            //Model com o nome "dados"
+            let oModel2 = new sap.ui.model.json.JSONModel();
+            oModel2.setData({"usuario": {"nome":"Mavih"}});
+            oView.setModel(oModel2, "dados");
 
         },
         //Métodos do framework[<-]
-        onPress() {
+        onTestModels() {
+            
+            //Model padrão da View
+            // let sText = this.getView().getModel().getData().usuario.nome;
+            // console.log("Texto com o Model padrão - " + sText);
+            
+            //Model com o nome "dados"
+            let sText = this.getView().getModel("dados").getData().usuario.nome;
+            console.log("Texto com o Model 'dados' - " + sText);
 
-            let oI18n = this.getView().getModel('i18n').getResourceBundle();
-            let oModel = this.getView().getModel();
-            let oData = oModel.getData();
+            //Model i18n
+            let oI18n = this.getView().getModel("i18n").getResourceBundle();
+            sText = oI18n.getText("title");
 
-            let sText = oI18n.getText("message", [oData.usuario.nome, oData.usuario.mensagens]);
-            MessageToast.show(sText);
+            console.log("Texto com a chave 'title' - " + sText);
 
+            //Model com o nome "usuarios"
+            let aUsers = this.getView().getModel("usuarios").getData();
+            sText = aUsers[0].nome;
+
+            console.log("Texto com o Model 'usuarios' - " + sText);
+
+            //Model do serviço oData.
+            let oModel = this.getOwnerComponent().getModel();
+            oModel.read("/OVCabSet", {
+                success: function(oData, oResponse) {
+                    console.log("Dados retornados do Serviço");
+                    console.log(oData);
+                    console.log(oResponse);
+                },
+                error: function(oError){
+                    console.log(oError)
+                }
+            });
         }
     });
 });

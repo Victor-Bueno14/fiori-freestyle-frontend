@@ -4,19 +4,37 @@
     xmlns:f="sap.ui.layout.form"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
-            <!-- <Text text="{i18n>customerName}:" class="sapUiTinyMargin"/> --> 
-            <Text core:require="{ formatMessage: 'sap/base/strings/formatMessage' }"
-                text="{ 
-                    parts:[
-                        {path: 'i18n>welcomeMsg'},
-                        {path: '/usuario/nome'}
-                    ],
-                    formatter: 'formatMessage'
-                 }"
+        <VBox class="sapUiTinyMargin">
+            <Label text="Model padrão da view (origem: controller)"/>
+            <Text text="{/usuario/nome}"/>
 
-                 class="sapUiTinyMargin"
-            />
-            
-            <Button type="Emphasized" text="{i18n>displayMsg}" press="onPress" />
+            <Text text="------------------------------------------------------------"/>
+
+            <Label text="Model 'dados' da view (origem: controller)"/>
+            <Text text="{dados>/usuario/nome}"/>
+
+            <Text text="------------------------------------------------------------"/>
+
+            <Label text="Model i18n - chave title (origem: manifest)"/>
+            <Text text="{i18n>title}"/>
+
+            <Text text="------------------------------------------------------------"/>
+
+            <Label text="Model 'usuarios' (origem: manifest)"/>
+            <Text text="{usuarios>/0/id} - {usuarios>/0/nome}"/>
+
+            <Text text="------------------------------------------------------------"/>
+
+            <Label text="Model padrão do serviço (origem: manifest)"/>
+            <List headerText="Ordens" items="{ path: '/OVCabSet'}">
+                <StandardListItem title="Ordem {OrdemId}" description="{CriadoPor}"></StandardListItem>
+            </List>
+
+            <Text text="{/OVCabSet(1)/OrdemId} - {/OVCabSet(1)/CriadoPor}"/>
+
+            <Text text="------------------------------------------------------------"/>
+
+            <Button text="Testar Models" press="onTestModels"/>
+        </VBox>
     </Page>
 </mvc:View>
