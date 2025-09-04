@@ -8,55 +8,56 @@ sap.ui.define([
         //Métodos do framework[->]
         onInit() {
 
-            let oView = this.getView();
-
-            //Model padrão da View
-            // let oModel = new sap.ui.model.json.JSONModel();
-
-            // oModel.setData({"usuario": {"nome": "Victor"}});
-            // oView.setModel(oModel);
-
-            //Model com o nome "dados"
+            let oModel1 = new sap.ui.model.json.JSONModel();
             let oModel2 = new sap.ui.model.json.JSONModel();
-            oModel2.setData({"usuario": {"nome":"Mavih"}});
-            oView.setModel(oModel2, "dados");
+            let oModel3 = new sap.ui.model.json.JSONModel();
+
+            oModel1.setData({"usuario": {"nome": "Victor"}});
+            oModel1.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
+            this.getView().setModel(oModel1,"oneway");
+
+            oModel2.setData({"usuario": {"nome": "Mavih"}});
+            oModel2.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+            this.getView().setModel(oModel2,"twoway");
+            
+            oModel3.setData({"usuario": {"nome": "Messi"}});
+            oModel3.setDefaultBindingMode(sap.ui.model.BindingMode.OneTime);
+            this.getView().setModel(oModel3,"onetime");
 
         },
         //Métodos do framework[<-]
-        onTestModels() {
-            
-            //Model padrão da View
-            // let sText = this.getView().getModel().getData().usuario.nome;
-            // console.log("Texto com o Model padrão - " + sText);
-            
-            //Model com o nome "dados"
-            let sText = this.getView().getModel("dados").getData().usuario.nome;
-            console.log("Texto com o Model 'dados' - " + sText);
 
-            //Model i18n
-            let oI18n = this.getView().getModel("i18n").getResourceBundle();
-            sText = oI18n.getText("title");
+        onTestOneWay() {
 
-            console.log("Texto com a chave 'title' - " + sText);
+            let oModel = this.getView().getModel("oneway");
+            let oData = oModel.getData();
 
-            //Model com o nome "usuarios"
-            let aUsers = this.getView().getModel("usuarios").getData();
-            sText = aUsers[0].nome;
+            oData.usuario.nome = "Victor Bueno";
 
-            console.log("Texto com o Model 'usuarios' - " + sText);
+            oModel.setData(oData);
 
-            //Model do serviço oData.
-            let oModel = this.getOwnerComponent().getModel();
-            oModel.read("/OVCabSet", {
-                success: function(oData, oResponse) {
-                    console.log("Dados retornados do Serviço");
-                    console.log(oData);
-                    console.log(oResponse);
-                },
-                error: function(oError){
-                    console.log(oError)
-                }
-            });
+        },
+
+        onTestTwoWay() {
+
+            let oModel = this.getView().getModel("twoway");
+            let oData = oModel.getData();
+
+            oData.usuario.nome = "Mavih Dutra";
+
+            oModel.setData(oData);
+
+        },
+
+        onTestOneTime() {
+
+            let oModel = this.getView().getModel("onetime");
+            let oData = oModel.getData();
+
+            oData.usuario.nome = "Lionel Messi";
+
+            oModel.setData(oData);
+
         }
     });
 });
