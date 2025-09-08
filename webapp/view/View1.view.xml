@@ -4,25 +4,12 @@
     xmlns:f="sap.ui.layout.form"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
-        <VBox class="sapUiSmallMargin">
-            <Label text="One Way: Model -> View"/>
-            <Input value="{oneway>/usuario/nome}"/>
-            <Text text="{oneway>/usuario/nome}"/>
-            <Button text="One Way - Adicionar Ponto Final" press="onTestOneWay"/>
-        </VBox>
+        <Toolbar >
+            <Button text="Novo Cliente" press="onNewCustomer"/>
 
-        <VBox class="sapUiSmallMargin">
-            <Label text="Two Way: Model -> View"/>
-            <Input value="{twoway>/usuario/nome}"/>
-            <Text text="{twoway>/usuario/nome}"/>
-            <Button text="Two Way - Adicionar Ponto Final" press="onTestTwoWay"/>
-        </VBox>
+            <ToolbarSeparator />
 
-        <VBox class="sapUiSmallMargin">
-            <Label text="One Time: Model -> View"/>
-            <Input value="{onetime>/usuario/nome}"/>
-            <Text text="{onetime>/usuario/nome}"/>
-            <Button text="One Time - Adicionar Ponto Final" press="onTestOneTime"/>
-        </VBox>
+            <Button text="Editar Cliente" press="onEditCustomer"/>
+        </Toolbar>
     </Page>
 </mvc:View>
