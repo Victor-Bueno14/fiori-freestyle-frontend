@@ -4,12 +4,26 @@
     xmlns:f="sap.ui.layout.form"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
-        <Toolbar >
-            <Button text="Novo Cliente" press="onNewCustomer"/>
+        <VBox class="sapUiSmallMargin">
+            <Label text="Última Ordem Criada: "/>
+            <Input value="" id="lastOrder" editable="false"/>
 
-            <ToolbarSeparator />
+            <TextArea value="" id="textArea1" rows="8" width="100%" editable="false"></TextArea>
+        </VBox>
 
-            <Button text="Editar Cliente" press="onEditCustomer"/>
-        </Toolbar>
+        <HBox class="sapUiSmallMargin">
+            <Button text="Criar Ov" press="onCreateOv" class="sapUiTinyMargin"/>
+
+
+            <Button text="Criar Ov (Deep)" press="onCreateOvDeep" class="sapUiTinyMargin"/>
+
+
+            <Button text="Ler Ov" press="onReadOv" class="sapUiTinyMargin"/>
+
+            
+            <Button text="Atualizar Ov" press="onUpdateOv" class="sapUiTinyMargin"/>
+
+            <Button text="Delete Ov" press="onDeleteOv" class="sapUiTinyMargin"/>
+        </HBox>
     </Page>
 </mvc:View>

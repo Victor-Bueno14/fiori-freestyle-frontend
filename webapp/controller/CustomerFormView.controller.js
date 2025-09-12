@@ -44,7 +44,7 @@ sap.ui.define([
 
         _onRouteMatchNew (oEvent) {
 
-            alert("Modo criação do Cliente!");
+            MessageToast.show("Modo criação do Cliente!");
 
         },
 
@@ -54,7 +54,7 @@ sap.ui.define([
             let oArgs = oEvent.getParameter("arguments");
             let sCustomerId = oArgs.CustomerId;
 
-            alert("Modo modificação do cliente " + sCustomerId);
+            MessageToast.show("Modo modificação do cliente " + sCustomerId);
 
         }
     });
