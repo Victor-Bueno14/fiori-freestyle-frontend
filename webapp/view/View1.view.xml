@@ -1,29 +1,115 @@
 <mvc:View controllerName="zov.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
-    xmlns:f="sap.ui.layout.form"
+    xmlns:t="sap.ui.table"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <VBox class="sapUiSmallMargin">
-            <Label text="Última Ordem Criada: "/>
-            <Input value="" id="lastOrder" editable="false"/>
+    <Page 
+        id="page" 
+        title="{i18n>title}" 
+        showNavButton="true" 
+        navButtonPress="onNavBack">
+        <Toolbar>
+            <ToolbarSpacer />
 
-            <TextArea value="" id="textArea1" rows="8" width="100%" editable="false"></TextArea>
-        </VBox>
+            <Button text="Home" press="onHome" class="sapUiLargeMargin" />
 
-        <HBox class="sapUiSmallMargin">
-            <Button text="Criar Ov" press="onCreateOv" class="sapUiTinyMargin"/>
+            <ToolbarSeparator />
 
+            <Button text="{i18n>createOrder}" press="onCreateOv" class="sapUiLargeMargin"/>
 
-            <Button text="Criar Ov (Deep)" press="onCreateOvDeep" class="sapUiTinyMargin"/>
+            <ToolbarSeparator />
 
+            <Button text="{i18n>createOrderDeep}" press="onCreateDeepOv" class="sapUiLargeMargin"/>
 
-            <Button text="Ler Ov" press="onReadOv" class="sapUiTinyMargin"/>
+            <ToolbarSeparator />
 
+            <Button text="{i18n>viewOrder}" press="onReadOv" class="sapUiLargeMargin" />
+
+            <ToolbarSeparator />
+
+            <Button text="{i18n>modifyOrder}" press="onEditOv" class="sapUiLargeMargin"/>
+
+            <ToolbarSeparator />
+
+            <Button text="{i18n>deleteOrder}" press="onDeleteOv" class="sapUiLargeMargin"/>
+
+            <ToolbarSpacer />
+        </Toolbar>
+
+        <t:Table 
+            id="table"
+            rows="{/OVCabSet}"
+            selectionMode="None"
+            alternateRowColors="true"
+            threshold="10"
+            class="sapUiSmallMargin"
+        >
+            <t:extension>
+                <OverflowToolbar style="Standard">
+                    <Title id="tittle" text="{i18n>title}" />
+                </OverflowToolbar>
+            </t:extension>
             
-            <Button text="Atualizar Ov" press="onUpdateOv" class="sapUiTinyMargin"/>
+            <t:columns>
+                <t:Column width="6rem">
+                    <Label text="{i18n>orderId}" />
+                    <t:template>
+                        <Text text="{OrdemId}" wrapping="false" />
+                    </t:template>
+                </t:Column>
+                
+                <t:Column>
+                    <Label text="{i18n>creationDate}" />
+                    <t:template>
+                        <Text text="{
+                        path: 'DataCriacao', formatter: '.formatDateBr'
+                        }" 
+                        wrapping="false" />
+                    </t:template>
+                </t:Column>
 
-            <Button text="Delete Ov" press="onDeleteOv" class="sapUiTinyMargin"/>
-        </HBox>
+                <t:Column>
+                    <Label text="{i18n>createdBy}"/>
+                    <t:template>
+                        <Text text="{CriadoPor}" wrapping="false" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>clientId}"/>
+                    <t:template>
+                        <Text text="{ClienteId}" wrapping="false" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>totalItems}"/>
+                    <t:template>
+                        <Text text="{TotalItens}" wrapping="false" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>totalFreight}"/>
+                    <t:template>
+                        <Text text="{TotalFrete}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>totalOrder}" />
+                    <t:template>
+                        <Text text="{TotalOrdem}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>orderStatus}" />
+                    <t:template>
+                        <Text text="{Status}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+            </t:columns>
+        </t:Table>
     </Page>
 </mvc:View>

@@ -1,0 +1,170 @@
+<mvc:View controllerName="zov.controller.CreateOvView"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page id="page1" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+        <Toolbar>
+            <ToolbarSpacer />
+
+            <Button text="Home" press="onHome" class="sapUiLargeMargin" />
+
+            <ToolbarSeparator />
+
+            <Button text="{i18n>createOrder}" press="onCreateOv" class="sapUiLargeMargin"/>
+
+            <ToolbarSeparator />
+
+            <Button text="{i18n>createOrderDeep}" press="onCreateDeepOv" class="sapUiLargeMargin"/>
+
+            <ToolbarSeparator />
+
+            <Button text="{i18n>viewOrder}" press="onReadOv" class="sapUiLargeMargin" />
+
+            <ToolbarSeparator />
+
+            <Button text="{i18n>modifyOrder}" press="onEditOv" class="sapUiLargeMargin"/>
+
+            <ToolbarSeparator />
+
+            <Button text="{i18n>deleteOrder}" press="onDeleteOv" class="sapUiLargeMargin"/>
+
+            <ToolbarSpacer />
+        </Toolbar>
+
+        <VBox class="sapUiSmallMargin">
+            <f:Form id="FormChange480_12120" editable="true">
+                <f:title>
+                    <core:Title text="{i18n>salesOrderInfo}"></core:Title>
+                </f:title>
+
+                <f:layout>
+                    <f:ResponsiveGridLayout 
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="4"
+                        adjustLabelSpan="false"
+                        emptySpanXL="3"
+                        emptySpanL="3"
+                        emptySpanM="3"
+                        emptySpanS="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                        singleContainerFullSize="false" />
+                </f:layout>
+            
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>orderId}">
+                            <f:fields>
+                                <Input value="" id="ordemIdCreate" editable="false" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>creationDate}">
+                            <f:fields>
+                                <Input value="" id="dataCriacaoCreate" editable="false"/>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>     
+
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>createdBy}">
+                            <f:fields>
+                                <Input value="" id="criadoPorCreate" editable="false" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>totalOrder}">
+                            <f:fields>
+                                <Input value="" id="totalOrdemCreate" editable="false" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </VBox>
+
+        <VBox class="sapUiSmallMargin">
+            <f:Form id="FormChange480_12120-2" editable="true">
+                <f:title>
+                    <core:Title text="{i18n>createSalesOrder}"></core:Title>
+                </f:title>
+
+                <f:layout>
+                    <f:ResponsiveGridLayout 
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="4"
+                        adjustLabelSpan="false"
+                        emptySpanXL="3"
+                        emptySpanL="3"
+                        emptySpanM="3"
+                        emptySpanS="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                        singleContainerFullSize="false" />
+                </f:layout>
+            
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>clientId}">
+                            <f:fields>
+                                 <Input value="" id="clienteIdCreate" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>totalItems}">
+                            <f:fields> 
+                                <Input value="" id="totalItensCreate" change="onChange"/>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>totalFreight}">
+                            <f:fields>
+                                <Input value="" id="totalFreteCreate" change="onChange"/>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+
+                    <f:FormContainer>
+                        <f:FormElement label="{i18n>orderStatus}">
+                            <f:fields>
+                                <Input value="" id="statusOrdemCreate" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+
+                    <f:FormContainer>
+                        <f:FormElement label="">
+                            <f:fields>
+                                <Button type="Emphasized" text="{i18n>clean}" press="onClean"/>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+                    
+                    <f:FormContainer>
+                        <f:FormElement label="">
+                            <f:fields>
+                                <Button type="Emphasized" text="{i18n>create}" press="onCreate"/>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+
+                </f:formContainers>
+            </f:Form>
+        </VBox>
+    </Page>
+</mvc:View>

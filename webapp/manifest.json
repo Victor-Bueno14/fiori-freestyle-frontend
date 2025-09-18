@@ -105,17 +105,38 @@
           ]
         },
         {
-          "name": "RouteCustomerNew",
-          "pattern": "customer/new",
+          "name": "RouteCreateOv",
+          "pattern": "criarOv",
           "target": [
-            "TargetCustomerForm"
+            "TargetCreateOv"
           ]
         },
         {
-          "name": "RouteCustomerEdit",
-          "pattern": "customer/{CustomerId}/edit",
+          "name": "RouteCreateDeepOv",
+          "pattern": "criarDeepOv",
           "target": [
-            "TargetCustomerForm"
+            "TargetCreateDeepOv"
+          ]
+        },
+        {
+          "name": "RouteReadOv",
+          "pattern": "lerOV",
+          "target": [
+            "TargetReadOv"
+          ]
+        },
+        {
+          "name": "RouteEditOv",
+          "pattern": "modificarOV",
+          "target": [
+            "TargetEditOv"
+          ]
+        },
+        {
+          "name": "RouteDeleteOv",
+          "pattern": "deletarOV",
+          "target": [
+            "TargetDeleteOv"
           ]
         }
       ],
@@ -127,12 +148,40 @@
           "id": "View1",
           "name": "View1"
         },
-        "TargetCustomerForm": {
+        "TargetCreateOv": {
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "CreateOvView",
+          "viewName": "CreateOvView"
+        },
+        "TargetCreateDeepOv": {
+          "viewType": "XML",
+          "transition":"slide",
+          "clearControlAggregation": false,
+          "viewId": "CreateDeepOvView",
+          "viewName": "CreateDeepOvView"
+        },
+        "TargetReadOv": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "CustomerFormView",
-          "viewName": "CustomerFormView"
+          "viewId": "ReadOvView",
+          "viewName": "ReadOvView"
+        },
+        "TargetEditOv": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "EditOvView",
+          "viewName": "EditOvView"
+        },
+        "TargetDeleteOv": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "DeleteOvView",
+          "viewName": "DeleteOvView"
         }
       }
     },
