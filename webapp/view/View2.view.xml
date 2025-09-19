@@ -1,11 +1,11 @@
-<mvc:View controllerName="zov.controller.View1"
+<mvc:View controllerName="zov.controller.View2"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns:t="sap.ui.table"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns="sap.m">
     <Page 
-        id="page" 
+        id="page6" 
         title="{i18n>title}" 
         showNavButton="true" 
         navButtonPress="onNavBack">
@@ -46,12 +46,6 @@
                         </fb:control>
                     </fb:FilterItem>
 
-                    <fb:FilterItem name="ClienteId" label="{i18n>clientId}">
-                        <fb:control>
-                            <Input value="{filter>/ClienteId}"/>
-                        </fb:control>
-                    </fb:FilterItem>
-
                     <fb:FilterItem name="OrdencaoCampo" label="{i18n>sortField}">
                         <fb:control>
                             <Select selectedKey="{filter>/OrdenacaoCampo}">
@@ -79,13 +73,25 @@
                             </Select>
                         </fb:control>
                     </fb:FilterItem>
+
+                    <fb:FilterItem name="Limite" label="Limit">
+                        <fb:control>
+                            <Input value="{filter>/Limite}" type="Number"/>
+                        </fb:control>
+                    </fb:FilterItem>
+
+                    <fb:FilterItem name="Offset" label="Offset">
+                        <fb:control>
+                            <Input value="{filter>/Offset}" type="Number"/>
+                        </fb:control>
+                    </fb:FilterItem>
                 </fb:filterItems>
             </fb:FilterBar>
         </VBox>
 
         <t:Table 
-            id="table"
-            rows="{/OVCabSet}"
+            id="table2"
+            rows="{table>/}"
             selectionMode="MultiToggle"
             alternateRowColors="true"
             threshold="10"
@@ -102,7 +108,7 @@
                 <t:Column width="6rem">
                     <Label text="{i18n>orderId}" />
                     <t:template>
-                        <Text text="{OrdemId}" wrapping="false" />
+                        <Text text="{table>OrdemId}" wrapping="false" />
                     </t:template>
                 </t:Column>
                 
@@ -110,7 +116,7 @@
                     <Label text="{i18n>creationDate}" />
                     <t:template>
                         <Text text="{
-                        path: 'DataCriacao',
+                        path: 'table>DataCriacao',
                         type: 'sap.ui.model.odata.type.Date',
                         formatOptions: {
                                 UTC: true,
@@ -124,42 +130,42 @@
                 <t:Column>
                     <Label text="{i18n>createdBy}"/>
                     <t:template>
-                        <Text text="{CriadoPor}" wrapping="false" />
+                        <Text text="{table>CriadoPor}" wrapping="false" />
                     </t:template>
                 </t:Column>
 
                 <t:Column>
                     <Label text="{i18n>clientId}"/>
                     <t:template>
-                        <Text text="{ClienteId}" wrapping="false" />
+                        <Text text="{table>ClienteId}" wrapping="false" />
                     </t:template>
                 </t:Column>
 
                 <t:Column>
                     <Label text="{i18n>totalItems}"/>
                     <t:template>
-                        <Text text="{TotalItens}" wrapping="false" />
+                        <Text text="{table>TotalItens}" wrapping="false" />
                     </t:template>
                 </t:Column>
 
                 <t:Column>
                     <Label text="{i18n>totalFreight}"/>
                     <t:template>
-                        <Text text="{TotalFrete}" wrapping="false"/>
+                        <Text text="{table>TotalFrete}" wrapping="false"/>
                     </t:template>
                 </t:Column>
 
                 <t:Column>
                     <Label text="{i18n>totalOrder}" />
                     <t:template>
-                        <Text text="{TotalOrdem}" wrapping="false"/>
+                        <Text text="{table>TotalOrdem}" wrapping="false"/>
                     </t:template>
                 </t:Column>
 
                 <t:Column>
                     <Label text="{i18n>orderStatus}" />
                     <t:template>
-                        <Text text="{Status}" wrapping="false"/>
+                        <Text text="{table>Status}" wrapping="false"/>
                     </t:template>
                 </t:Column>
             </t:columns>

@@ -4,7 +4,7 @@ sap.ui.define([
 ], (Controller, MessageToast) => {
     "use strict";
 
-    return Controller.extend("zov.controller.View1", {
+    return Controller.extend("zov.controller.View2", {
         //Métodos do framework[->]
         onInit: function() {
             const oView = this.getView();
@@ -20,10 +20,16 @@ sap.ui.define([
                 "TotalOrder": "",
                 "Status": "",
                 "OrdenacaoCampo": "OrdemId",
-                "OrdenacaoTipo": "ASC"
+                "OrdenacaoTipo": "ASC",
+                "Limite": 10,
+                "Offset": 0
             });
 
             oView.setModel(oFModel, "filter");
+
+            const oTModel = new sap.ui.model.json.JSONModel();
+            oTModel.setData([]);
+            oView.setModel(oTModel, "table");
 
             this.onFilterSearch();
         },
@@ -87,8 +93,9 @@ sap.ui.define([
             let oFilter = null;
 
             const oView = this.getView();
-            const oTable = oView.byId("table");
+            const oModel = this.getOwnerComponent().getModel();
             const oFModel = oView.getModel("filter");
+            const oTModel = oView.getModel("table");
             const oFData = oFModel.getData();
             const aParams = [];
 
@@ -107,17 +114,6 @@ sap.ui.define([
                 aFilters.push(oFilter);
             };
 
-            if (oFData.ClienteId != "" ) {
-                //Criando Filtro do CLiente Id
-                oFilter = new sap.ui.model.Filter({
-                    path: 'ClienteId',
-                    operator: sap.ui.model.FilterOperator.EQ,
-                    value1: oFData.ClienteId
-                });
-
-                aFilters.push(oFilter);
-            };
-
             let bDescending = false;
 
             if(oFData.OrdenacaoTipo == "DESC") {
@@ -130,12 +126,27 @@ sap.ui.define([
 
             console.log(oSort, aSorter);
 
+            //Limite e Offset
+            aParams.push("$top=" + oFData.Limite);
+            aParams.push("$skip=" + oFData.Offset);
+
             //Executando Filtro
-            oTable.bindRows({
-                path: "/OVCabSet",
-                sorter: aSorter,
-                filters: aFilters
-            });
+            oView.setBusy(true);
+            
+            oModel.read("/OVCabSet",{
+                sorters: aSorter,
+                filters: aFilters,
+                urlParameters: aParams,
+
+                success: function (oData2) {
+                    oView.setBusy(false);
+                    oTModel.setData(oData2.results);
+                },
+                error: function (oError){
+                    oView.setBusy(false);
+                    oTModel.show("Erro");
+                }
+            })
         },
     });
 });

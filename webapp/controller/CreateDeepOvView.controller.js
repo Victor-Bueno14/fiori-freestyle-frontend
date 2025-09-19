@@ -154,7 +154,7 @@ sap.ui.define([
 
             const oView = this.getView();
 
-            const oModel = oView.getModel("items")
+            const oModel = oView.getModel("items");
 
             const oData = oModel.getData();
 
