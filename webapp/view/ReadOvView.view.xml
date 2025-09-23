@@ -4,33 +4,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns="sap.m">
     <Page id="page2" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
-        <Toolbar>
-            <ToolbarSpacer />
-
-            <Button text="Home" press="onHome" class="sapUiLargeMargin" />
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>createOrder}" press="onCreateOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>createOrderDeep}" press="onCreateDeepOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>viewOrder}" press="onReadOv" class="sapUiLargeMargin" />
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>modifyOrder}" press="onEditOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>deleteOrder}" press="onDeleteOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSpacer />
-        </Toolbar>
+        <mvc:XMLView viewName="zov.view.NavBarView"/>
 
         <VBox class="sapUiSmallMargin">
             <f:Form id="FormChange480_12121" editable="true">
@@ -67,7 +41,7 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button type="Emphasized" text="{i18n>search}" press="onSearch" />
+                                <Button icon="sap-icon://search" type="Emphasized" text="{i18n>search}" press="onSearch" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -159,7 +133,7 @@
                 <f:FormContainer>
                     <f:FormElement label="">
                         <f:fields>
-                            <Button type="Emphasized" text="{i18n>clean}" press="onClean" />
+                            <Button icon="sap-icon://clear-all" type="Emphasized" text="{i18n>clean}" press="onClean" />
                         </f:fields>
                     </f:FormElement>
                 </f:FormContainer>

@@ -5,33 +5,7 @@
     xmlns:l="sap.ui.layout"
     xmlns="sap.m">
     <Page id="page4" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
-        <Toolbar>
-            <ToolbarSpacer />
-
-            <Button text="Home" press="onHome" class="sapUiLargeMargin" />
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>createOrder}" press="onCreateOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>createOrderDeep}" press="onCreateDeepOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>viewOrder}" press="onReadOv" class="sapUiLargeMargin" />
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>modifyOrder}" press="onEditOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>deleteOrder}" press="onDeleteOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSpacer />
-        </Toolbar>
+        <mvc:XMLView viewName="zov.view.NavBarView"/>
 
         <VBox class="sapUiSmallMargin">
             <f:Form id="FormChange480_12123" editable="true">
@@ -68,7 +42,7 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button type="Emphasized" text="{i18n>search}" press="onSearch" />
+                                <Button icon="sap-icon://search" type="Emphasized" text="{i18n>search}" press="onSearch" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -161,8 +135,8 @@
                             <f:fields>
                                 <HBox justifyContent="End">
                                     <items>
-                                        <Button type="Emphasized" text="{i18n>clean}" width="10rem" class="sapUiMediumMarginEnd" press="onClean"></Button>
-                                        <Button type="Emphasized" text="{i18n>delete}" width="10rem" press="onDelete"></Button>
+                                        <Button icon="sap-icon://clear-all" type="Emphasized" text="{i18n>clean}" width="10rem" class="sapUiMediumMarginEnd" press="onClean"></Button>
+                                        <Button icon="sap-icon://delete" type="Emphasized" text="{i18n>delete}" width="10rem" press="onDelete"></Button>
                                     </items>
                                 </HBox>
                             </f:fields>

@@ -9,53 +9,6 @@ sap.ui.define([
         onInit: function() {
         },
         //Métodos do framework[<-]
-        onNavBack: function () {
-            const oHistory = sap.ui.core.routing.History.getInstance();
-            const sPreviousHash = oHistory.getPreviousHash();
-
-            if (sPreviousHash !== undefined) {
-                window.history.go(-1);
-            } else {
-                this.getRouter().navTo("RouteReadOv");
-            }
-        },
-
-        onHome: function () {
-
-            this.getRouter().navTo("RouteView1")
-
-        },
-
-        onCreateOv: function() {
-
-            this.getRouter().navTo("RouteCreateOv");
-
-        },
-
-        onCreateDeepOv: function() {
-
-            this.getRouter().navTo("RouteCreateDeepOv");
-
-        },
-
-        onReadOv: function() {
-
-            this.getRouter().navTo("RouteReadOv");
-
-        },
-
-        onEditOv: function () {
-
-            this.getRouter().navTo("RouteEditOv");
-
-        },
-
-        onDeleteOv: function () {
-
-            this.getRouter().navTo("RouteDeleteOv");
-
-        },
-
         onSearch: function () {
             const oView = this.getView();
 
@@ -79,12 +32,6 @@ sap.ui.define([
             oView.byId("totalFreteRead").setValue("");
             oView.byId("totalOrdemRead").setValue("");
             oView.byId("statusOrdemRead").setValue("");
-        },
-
-        getRouter: function () {
-
-            return sap.ui.core.UIComponent.getRouterFor(this);
-
         },
 
         read: function (iOrdemId) {

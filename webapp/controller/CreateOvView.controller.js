@@ -17,57 +17,8 @@ sap.ui.define([
             const sUser = sap.ushell.Container.getService("UserInfo").getId();
 
             oView.byId("dataCriacaoCreate").setValue(sDate);
-
-            oView.byId("criadoPorCreate").setValue(sUser);
         },
         //Métodos do framework[<-]
-        onNavBack: function () {
-            const oHistory = sap.ui.core.routing.History.getInstance();
-            const sPreviousHash = oHistory.getPreviousHash();
-
-            if (sPreviousHash !== undefined) {
-                window.history.go(-1);
-            } else {
-                this.getRouter().navTo("RouteCreateOv");
-            }
-        },
-
-        onHome: function () {
-
-            this.getRouter().navTo("RouteView1")
-
-        },
-
-        onCreateOv: function() {
-
-            this.getRouter().navTo("RouteCreateOv")
-
-        },
-
-        onCreateDeepOv: function() {
-
-            this.getRouter().navTo("RouteCreateDeepOv");
-
-        },
-
-        onReadOv: function() {
-
-            this.getRouter().navTo("RouteReadOv");
-
-        },
-
-        onEditOv: function () {
-
-            this.getRouter().navTo("RouteEditOv");
-
-        },
-
-        onDeleteOv: function () {
-
-            this.getRouter().navTo("RouteDeleteOv");
-
-        },
-
         onChange: function () {
             const oView = this.getView();
 
@@ -107,12 +58,6 @@ sap.ui.define([
             oView.byId("totalFreteCreate").setValue("");
             oView.byId("statusOrdemCreate").setValue("");
             oView.byId("totalOrdemCreate").setValue(0);
-
-        },
-
-        getRouter: function () {
-
-            return sap.ui.core.UIComponent.getRouterFor(this);
 
         },
 

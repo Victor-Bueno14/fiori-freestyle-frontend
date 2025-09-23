@@ -28,57 +28,6 @@ sap.ui.define([
             this.onFilterSearch();
         },
         //Métodos do framework[<-]
-        onNavBack: function () {
-            const oHistory = sap.ui.core.routing.History.getInstance();
-            const sPreviousHash = oHistory.getPreviousHash();
-
-            if (sPreviousHash !== undefined) {
-                window.history.go(-1);
-            } else {
-                this.getRouter().navTo("RouteView1");
-            }
-        },
-
-        onHome: function () {
-
-            this.getRouter().navTo("RouteView1")
-
-        },
-
-        onCreateOv: function() {
-
-            this.getRouter().navTo("RouteCreateOv");
-
-        },
-
-        onCreateDeepOv: function() {
-
-            this.getRouter().navTo("RouteCreateDeepOv");
-
-        },
-
-        onReadOv: function() {
-
-            this.getRouter().navTo("RouteReadOv");
-
-        },
-
-        onEditOv: function () {
-
-            this.getRouter().navTo("RouteEditOv");
-
-        },
-
-        onDeleteOv: function () {
-
-            this.getRouter().navTo("RouteDeleteOv");
-
-        },
-
-        getRouter: function () {
-            return sap.ui.core.UIComponent.getRouterFor(this);
-        },
-
         onFilterReset: function () {
 
         },
@@ -90,7 +39,6 @@ sap.ui.define([
             const oTable = oView.byId("table");
             const oFModel = oView.getModel("filter");
             const oFData = oFModel.getData();
-            const aParams = [];
 
             //Aplicando filtros
             const aSorter = [];

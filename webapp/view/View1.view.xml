@@ -9,33 +9,7 @@
         title="{i18n>title}" 
         showNavButton="true" 
         navButtonPress="onNavBack">
-        <Toolbar>
-            <ToolbarSpacer />
-
-            <Button text="Home" press="onHome" class="sapUiLargeMargin" />
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>createOrder}" press="onCreateOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>createOrderDeep}" press="onCreateDeepOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>viewOrder}" press="onReadOv" class="sapUiLargeMargin" />
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>modifyOrder}" press="onEditOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSeparator />
-
-            <Button text="{i18n>deleteOrder}" press="onDeleteOv" class="sapUiLargeMargin"/>
-
-            <ToolbarSpacer />
-        </Toolbar>
+        <mvc:XMLView viewName="zov.view.NavBarView"/>
 
         <VBox class="sapUiSmallMargin">
             <fb:FilterBar id="filterBar1" reset="onFilterReset" search="onFilterSearch">
@@ -73,8 +47,8 @@
                         <fb:control>
                             <Select selectedKey="{filter>/OrdenacaoTipo}">
                                 <items>
-                                    <core:Item text="Crescente" key="ASC" />
-                                    <core:Item text="Decrescente" key="DESC" />
+                                    <core:Item text="{i18n>asc}" key="ASC" />
+                                    <core:Item text="{i18n>desc}" key="DESC" />
                                 </items>
                             </Select>
                         </fb:control>
