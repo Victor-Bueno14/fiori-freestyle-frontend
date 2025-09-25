@@ -21,10 +21,6 @@ sap.ui.define([
 
             // enable routing
             this.getRouter().initialize();
-
-        sap.ui.require(["sap/ui/dom/includeStyleSheet"], function (includeStyleSheet) {
-            includeStyleSheet(sap.ui.require.toUrl("zov/css/style.css")); 
-        });
         }
     });
 });
