@@ -7,7 +7,7 @@
         <Toolbar id="toolbar">
             <ToolbarSpacer id="toolbar1"/>
 
-            <Button icon="sap-icon://home" text="Home" press="onHome" class="sapUiMediumMargin" />
+            <Button icon="sap-icon://home" text="Home" press="onHome" class="sapUiMediumMargin"/>
 
             <ToolbarSeparator/>
 

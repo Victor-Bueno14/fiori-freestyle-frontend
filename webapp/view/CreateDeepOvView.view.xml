@@ -3,6 +3,7 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form"
     xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
     xmlns="sap.m">
     <Page id="page5" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
         <mvc:XMLView viewName="zov.view.NavBarView"/>
@@ -34,7 +35,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdCreateDeep" editable="false" />
+                                <Input value="" id="ordemIdCreateDeep" editable="false" type="Number" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -58,7 +59,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalOrder}">
                             <f:fields>
-                                <Input value="" id="totalOrdemCreateDeep" editable="false" />
+                                <Input value="" id="totalOrdemCreateDeep" editable="false" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -93,7 +94,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>clientId}">
                             <f:fields>
-                                 <Input value="" id="clienteIdCreateDeep" />
+                                 <Input value="" id="clienteIdCreateDeep" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -101,7 +102,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalItems}">
                             <f:fields> 
-                                <Input value="" id="totalItensCreateDeep" liveChange="onChange"/>
+                                <Input value="" id="totalItensCreateDeep" liveChange="onChange" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -109,7 +110,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalFreight}">
                             <f:fields>
-                                <Input value="" id="totalFreteCreateDeep" liveChange="onChange"/>
+                                <Input value="" id="totalFreteCreateDeep" liveChange="onChange" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -169,7 +170,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>itemId}">
                             <f:fields>
-                                 <Input value="" id="itemId"/>
+                                 <Input value="" id="itemId" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -177,7 +178,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>material}">
                             <f:fields> 
-                                <Input value="" id="material" placeholder="Ex.: 1000"/>
+                                <Input value="" id="material" placeholder="Ex.: 1000" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -193,7 +194,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>quantity}">
                             <f:fields>
-                                <Input value=""  id="quantidade" liveChange="onChangeItem"/>
+                                <Input value=""  id="quantidade" liveChange="onChangeItem" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -201,7 +202,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>unitPrice}">
                             <f:fields>
-                                <Input value="" id="precoUni" liveChange="onChangeItem"/>
+                                <Input value="" id="precoUni" liveChange="onChangeItem" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -209,7 +210,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalPrice}">
                             <f:fields>
-                                <Input value="" id="precoTot" editable="false"/>
+                                <Input value="" id="precoTot" editable="false" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -243,6 +244,65 @@
                     </f:FormContainer>
                 </f:formContainers>
             </f:Form>
+        </VBox>
+
+        <VBox class="sapUiSmallMargin">
+            <t:Table 
+                id="tableItems"
+                rows="{items>/Items}"
+                selectionMode="None"
+                alternateRowColors="true"
+                threshold="10"
+                rowMode="fixed"
+            >
+                <t:extension>
+                    <OverflowToolbar style="Standard">
+                        <Title id="titleItems" text="{i18n>items}"/>
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:Column>
+                    <Label text="{i18n>itemId}"/>
+                    <t:template>
+                        <Text text="{items>ItemId}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>Material}"/>
+                    <t:template>
+                        <Text text="{items>Material}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>Description}"/>
+                    <t:template>
+                        <Text text="{items>Descricao}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>Quantity}"/>
+                    <t:template>
+                        <Text text="{items>Quantidade}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>unitPrice}"/>
+                    <t:template>
+                        <Text text="{items>PrecoUni}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>totalPrice}"/>
+                    <t:template>
+                        <Text text="{items>PrecoTot}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+            </t:Table>
         </VBox>
     </Page>
 </mvc:View>

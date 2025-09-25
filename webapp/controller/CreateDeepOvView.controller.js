@@ -7,7 +7,6 @@ sap.ui.define([
     return Controller.extend("zov.controller.CreateDeepOvView", {
         //Métodos do framework[->]
         onInit: function() {
-
             const oView = this.getView();
 
             const oDate = new Date();
@@ -33,10 +32,13 @@ sap.ui.define([
         onChange: function () {
             const oView = this.getView();
 
-            let iTotalItems = Number(oView.byId("totalItensCreateDeep").getValue());
-            let iTotalFreight = Number(oView.byId("totalFreteCreateDeep").getValue());
+            let iTotalItems = oView.byId("totalItensCreateDeep").getValue();
+            let iTotalFreight = oView.byId("totalFreteCreateDeep").getValue();
 
-            let iTotalOrdem = iTotalItems + iTotalFreight;
+            iTotalItems = iTotalItems.replace(",", ".");
+            iTotalFreight = iTotalFreight.replace(",", ".");
+
+            let iTotalOrdem = Number(iTotalItems) + Number(iTotalFreight);
 
             oView.byId("totalOrdemCreateDeep").setValue(iTotalOrdem);
         },
@@ -64,6 +66,8 @@ sap.ui.define([
                     oData.toOVItem = oItems.Items;
                 };
 
+                console.log(oData);
+
                 this.create(oData);
             };
         },
@@ -75,9 +79,7 @@ sap.ui.define([
             oView.byId("totalItensCreateDeep").setValue("");
             oView.byId("totalFreteCreateDeep").setValue("");
             oView.byId("statusOrdemCreateDeep").setValue("");
-            oView.byId("totalOrdemCreateDeep").setValue("");
-
-            this.onCleanItem();
+            oView.byId("totalOrdemCreateDeep").setValue("");;
         },
 
         onCleanItem: function () {
@@ -117,8 +119,6 @@ sap.ui.define([
             oItem.Quantidade = parseFloat(oView.byId("quantidade").getValue());
             oItem.PrecoUni = oView.byId("precoUni").getValue();
 
-            console.log(oData);
-
              if (
                  oItem.ItemId === "" ||
                  oItem.Material === "" ||
@@ -128,6 +128,8 @@ sap.ui.define([
              ) {
                 MessageToast.show("Preencha Todos os Campos do Item");
              } else {
+                oItem.PrecoTot = oView.byId("precoTot").getValue();
+
                 oData.Items.push(oItem);
 
                 oData.QuantityItems++;
@@ -141,6 +143,7 @@ sap.ui.define([
         },
 
         create: function(oData) {
+            const that = this;
             const oView = this.getView();
             const oModel = this.getOwnerComponent().getModel();
 
@@ -151,11 +154,22 @@ sap.ui.define([
                     oView.setBusy(false);
 
                     if(oResponse.statusCode == 201) {
+                        const oItemModel = oView.getModel("items");
+
+                        const oItem = oItemModel.getData();
+
+                        oItem.Items = [];
+                        oItem.QuantityItems = 0;
+
+                        oItemModel.setData(oItem);
+
                         oView.byId("ordemIdCreateDeep").setValue(oData2.OrdemId);
                         oView.byId("totalOrdemCreateDeep").setValue(oData2.TotalOrdem);
+
+                        that.onClean();
+
                         MessageToast.show("Ordem Cadastrada com Sucesso");
 
-                        this.onClean();
                     } else {
                         MessageToast.show("Erro no Cadastro");
                     }

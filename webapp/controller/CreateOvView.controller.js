@@ -17,6 +17,8 @@ sap.ui.define([
             const sUser = sap.ushell.Container.getService("UserInfo").getId();
 
             oView.byId("dataCriacaoCreate").setValue(sDate);
+
+            oView.byId("criadoPorCreate").setValue(sUser);
         },
         //Métodos do framework[<-]
         onChange: function () {
@@ -57,7 +59,7 @@ sap.ui.define([
             oView.byId("totalItensCreate").setValue("");
             oView.byId("totalFreteCreate").setValue("");
             oView.byId("statusOrdemCreate").setValue("");
-            oView.byId("totalOrdemCreate").setValue(0);
+            oView.byId("totalOrdemCreate").setValue("");
 
         },
 
