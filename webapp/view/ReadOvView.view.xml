@@ -33,7 +33,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdRead" />
+                                <Input value="" id="ordemIdRead" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>

@@ -24,10 +24,13 @@ sap.ui.define([
         onChange: function () {
             const oView = this.getView();
 
-            let iTotalItems = Number(oView.byId("totalItensCreate").getValue());
-            let iTotalFreight = Number(oView.byId("totalFreteCreate").getValue());
+            let iTotalItems = oView.byId("totalItensCreate").getValue();
+            let iTotalFreight = oView.byId("totalFreteCreate").getValue();
 
-            let iTotalOrdem = iTotalItems + iTotalFreight;
+            iTotalItems = iTotalItems.replace(",",".");
+            iTotalFreight = iTotalFreight.replace(",",".");
+
+            const iTotalOrdem = Number(iTotalItems) + Number(iTotalFreight);
 
             oView.byId("totalOrdemCreate").setValue(iTotalOrdem);
         },
@@ -46,10 +49,17 @@ sap.ui.define([
 
             if (oData.ClienteId === "" || oData.TotalItens === "" || oData.TotalFrete === "" || oData.Status === "") {
                 MessageToast.show("Preencha todos os campos!");
-            } else {
 
-                this.create(oData);
+                return;
             };
+
+            if (oData.Status.lenght > 1) {
+                MessageToast.show("Campo Status com muitos caracteres (Máximo: 1)");
+
+                return;
+            }
+
+            this.create(oData);
         },
 
         onClean: function () {

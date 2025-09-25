@@ -16,9 +16,11 @@ sap.ui.define([
 
             if (iOrdemId === "") {
                 MessageToast.show("Insira uma Ordem de Venda");
-            } else {
-                this.read(iOrdemId);
-            }
+
+                return;
+            };
+
+            this.read(iOrdemId);
 
         },
 

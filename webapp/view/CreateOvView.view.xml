@@ -33,7 +33,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdCreate" editable="false" />
+                                <Input value="" id="ordemIdCreate" editable="false" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -57,7 +57,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalOrder}">
                             <f:fields>
-                                <Input value="" id="totalOrdemCreate" editable="false" />
+                                <Input value="" id="totalOrdemCreate" editable="false" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -92,7 +92,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>clientId}">
                             <f:fields>
-                                 <Input value="" id="clienteIdCreate" />
+                                 <Input value="" id="clienteIdCreate" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -100,7 +100,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalItems}">
                             <f:fields> 
-                                <Input value="" id="totalItensCreate" liveChange="onChange"/>
+                                <Input value="" id="totalItensCreate" liveChange="onChange" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -108,7 +108,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalFreight}">
                             <f:fields>
-                                <Input value="" id="totalFreteCreate" liveChange="onChange"/>
+                                <Input value="" id="totalFreteCreate" liveChange="onChange" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -116,7 +116,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderStatus}">
                             <f:fields>
-                                <Input value="" id="statusOrdemCreate" />
+                                <Input value="" id="statusOrdemCreate" placeholder="L - Liberado / N - Negado"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>

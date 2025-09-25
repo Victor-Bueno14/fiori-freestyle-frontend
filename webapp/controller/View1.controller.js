@@ -7,7 +7,8 @@ sap.ui.define([
     return Controller.extend("zov.controller.View1", {
         //Métodos do framework[->]
         onInit: function() {
-
+            console.log(this.getView());
+        
             const oView = this.getView();
             const oFModel = new sap.ui.model.json.JSONModel();
 

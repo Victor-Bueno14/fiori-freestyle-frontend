@@ -52,24 +52,32 @@ sap.ui.define([
 
             const oItems = oModel.getData();
 
-            oData.CriadoPor = oView.byId("criadoPorCreateDeep").getValue();
-            oData.ClienteId = parseFloat(oView.byId("clienteIdCreateDeep").getValue());
+            oData.ClienteId  = parseFloat(oView.byId("clienteIdCreateDeep").getValue());
+            oData.CriadoPor  = oView.byId("criadoPorCreateDeep").getValue();
             oData.TotalItens = oView.byId("totalItensCreateDeep").getValue();
             oData.TotalFrete = oView.byId("totalFreteCreateDeep").getValue();
             oData.TotalOrdem = oView.byId("totalOrdemCreateDeep").getValue();
-            oData.Status = oView.byId("statusOrdemCreateDeep").getValue();
+            oData.Status     = oView.byId("statusOrdemCreateDeep").getValue();
 
             if (oData.ClienteId === "" || oData.TotalItens === "" || oData.TotalFrete === "" || oData.Status === "") {
                 MessageToast.show("Preencha todos os campos!");
-            } else {
-                if(oItems.QuantityItems > 0) {
-                    oData.toOVItem = oItems.Items;
-                };
 
-                console.log(oData);
+                return;
+            }
 
-                this.create(oData);
+            if (oData.Status.lenght > 1) {
+                MessageToast.show("Campo Status com muitos caracteres (Máximo: 1)");
+
+                return;
+            }
+
+            if(oItems.QuantityItems > 0) {
+                oData.toOVItem = oItems.Items;
             };
+
+
+            this.create(oData);
+            
         },
 
         onClean: function () {
@@ -96,10 +104,13 @@ sap.ui.define([
         onChangeItem: function () {
             const oView = this.getView();
 
-            const iQuantity = Number(oView.byId("quantidade").getValue());
-            const iUnitPrice = Number(oView.byId("precoUni").getValue());
+            let iQuantity = oView.byId("quantidade").getValue();
+            let iUnitPrice = oView.byId("precoUni").getValue();
 
-            const iTotalPrice = iQuantity * iUnitPrice;
+            iQuantity = iQuantity.replace(",", ".");
+            iUnitPrice = iUnitPrice.replace(",", ".");
+
+            const iTotalPrice = Number(iQuantity) * Number(iUnitPrice);
 
             oView.byId("precoTot").setValue(iTotalPrice);
         },
@@ -127,19 +138,22 @@ sap.ui.define([
                  oItem.PrecoUni === ""
              ) {
                 MessageToast.show("Preencha Todos os Campos do Item");
-             } else {
-                oItem.PrecoTot = oView.byId("precoTot").getValue();
 
-                oData.Items.push(oItem);
+                return;
+             }
 
-                oData.QuantityItems++;
+            oItem.PrecoTot = oView.byId("precoTot").getValue();
 
-                oModel.setData(oData);
+            oData.Items.push(oItem);
 
-                MessageToast.show("Item Criado com Sucesso");
+            oData.QuantityItems++;
 
-                this.onCleanItem();
-             };
+            oModel.setData(oData);
+
+            MessageToast.show("Item Criado com Sucesso");
+
+            this.onCleanItem();
+
         },
 
         create: function(oData) {

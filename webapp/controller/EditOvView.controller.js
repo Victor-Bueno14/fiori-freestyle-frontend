@@ -65,10 +65,13 @@ sap.ui.define([
         onChange: function () {
             const oView = this.getView();
 
-            const iTotalItems = Number(oView.byId("totalItensEdit").getValue());
-            const iTotalFreight = Number(oView.byId("totalFreteEdit").getValue());
+            let iTotalItems = oView.byId("totalItensEdit").getValue();
+            let iTotalFreight = oView.byId("totalFreteEdit").getValue();
 
-            const iTotalOrdem = iTotalItems + iTotalFreight;
+            iTotalItems = iTotalItems.replace(",", ".");
+            iTotalFreight = iTotalFreight.replace(",",".");
+
+            const iTotalOrdem = Number(iTotalItems) + Number(iTotalFreight);
 
             oView.byId("totalOrdemEdit").setValue(iTotalOrdem);
         },

@@ -34,7 +34,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdEdit" />
+                                <Input value="" id="ordemIdEdit" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -85,7 +85,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>clientId}">
                             <f:fields>
-                                <Input value="" id="clienteIdEdit" editable="false"/>
+                                <Input value="" id="clienteIdEdit" editable="false" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -93,7 +93,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalItems}">
                             <f:fields>
-                                <Input value="" id="totalItensEdit" editable="false" change="onChange"/>
+                                <Input value="" id="totalItensEdit" editable="false" change="onChange" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -101,7 +101,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalFreight}">
                             <f:fields>
-                                <Input value="" id="totalFreteEdit" editable="false" change="onChange"/>
+                                <Input value="" id="totalFreteEdit" editable="false" change="onChange" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -109,7 +109,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalOrder}">
                             <f:fields>
-                                <Input value="" id="totalOrdemEdit" editable="false"/>
+                                <Input value="" id="totalOrdemEdit" editable="false" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
