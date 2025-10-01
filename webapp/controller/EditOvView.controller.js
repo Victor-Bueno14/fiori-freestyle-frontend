@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-], (Controller, MessageToast) => {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], (Controller, MessageToast, MessageBox) => {
     "use strict";
 
     return Controller.extend("zov.controller.EditOvView", {
@@ -13,19 +14,50 @@ sap.ui.define([
         onSearch: function () {
             const oView = this.getView();
 
-            const iOrdemId = oView.byId("ordemIdEdit").getValue();
+            const iOrdemId = oView.byId("ordemIdEdit")
 
-            if (iOrdemId === "") {
-                MessageToast.show("Insira uma Ordem de Venda");
-            } else {
-                this.read(iOrdemId);
-            }
+            if (iOrdemId.getValue() === "") {
+                iOrdemId.setValueState("Error");
+
+                iOrdemId.setValueStateText("Campo Obrigatório");
+
+                MessageBox.alert("Insira uma Ordem de Venda");
+
+                return;
+            };
+
+            this.read(iOrdemId.getValue());
+            
         },
 
         onEdit: function () {
-            const oData = {}
-
             const oView = this.getView();
+
+            const oForm = oView.byId("FormChange480_12122-2");
+
+            const aInputs = oForm.findAggregatedObjects(true, function (oControl) {
+                return oControl instanceof sap.m.Input;
+            });
+
+            let bValido = true;
+
+            aInputs.forEach(function(oInput){
+                if (oInput.getValue() === "") {
+                    oInput.setValueState("Error");
+
+                    oInput.setValueStateText("Campo Obrigatório");
+
+                    bValido = false;
+                };
+            });
+
+            if (!bValido) {
+                MessageBox.alert("Preencha todos os campos!");
+
+                return;
+            };
+
+            const oData = {}
 
             const iOrdemId = oView.byId("ordemIdEdit").getValue();
 
@@ -36,18 +68,7 @@ sap.ui.define([
             oData.TotalOrdem = oView.byId("totalOrdemEdit").getValue();
             oData.Status = oView.byId("statusOrdemEdit").getValue();
 
-            if ( 
-                oData.CriadoPor === "" || 
-                oData.ClienteId === "" || 
-                oData.TotalItens === "" || 
-                oData.TotalFrete === "" ||
-                oData.TotalOrdem === "" || 
-                oData.Status === ""
-            ){
-                MessageToast.show("Preencha todos os campos");
-             } else {
-                this.edit(oData, iOrdemId);
-             }
+            this.edit(oData, iOrdemId);
         },
 
         onClean: function () {

@@ -1,7 +1,8 @@
 <mvc:View controllerName="zov.controller.ReadOvView"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
-    xmlns:f="sap.ui.layout.form"
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:t="sap.ui.table"
     xmlns="sap.m">
     <Page id="page2" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
         <mvc:XMLView viewName="zov.view.NavBarView"/>
@@ -33,7 +34,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdRead" type="Number"/>
+                                <Input value="" id="ordemIdRead" type="Number" required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -139,5 +140,68 @@
                 </f:FormContainer>
             </f:Form>
         </VBox>
+
+        <t:Table 
+            id="tableReadItems"
+            rows="{table>/}"
+            selectionMode="MultiToggle"
+            threshold="10"
+            class="sapUiTinyMargin"
+        >
+            <t:extension>
+                <OverflowToolbar style="Standard">
+                    <Title id="titleReadItems" text="{i18n>items}"/> 
+                </OverflowToolbar>
+            </t:extension>
+
+            <t:Column>
+                <Label text="{i18n>orderId}"/>
+                <t:template>
+                    <Text text="{table>OrdemId}" wrapping="false"/>
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>itemId}"/>
+                <t:template>
+                    <Text text="{table>ItemId}" wrapping="false"/>
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>material}"/>
+                <t:template>
+                    <Text text="{table>Material}" wrapping="false"/>
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>description}"/>
+                <t:template>
+                    <Text text="{table>Descricao}" wrapping="false"/>
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>quantity}"/>
+                <t:template>
+                    <Text text="{table>Quantidade}" wrapping="false"/>
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>unityPrice}"/>
+                <t:template>
+                    <Text text="{table>PrecoUni}" wrapping="false"/>
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>totalPrice}"/>
+                <t:template>
+                    <Text text="{table>PrecoTot}" wrapping="false"/>
+                </t:template>
+            </t:Column>
+        </t:Table>
     </Page>
 </mvc:View>

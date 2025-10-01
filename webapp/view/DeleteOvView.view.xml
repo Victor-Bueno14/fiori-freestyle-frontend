@@ -34,7 +34,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdDelete" type="Number"/>
+                                <Input value="" id="ordemIdDelete" type="Number" required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>

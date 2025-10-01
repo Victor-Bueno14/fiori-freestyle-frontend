@@ -1,26 +1,36 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-], (Controller, MessageToast) => {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], (Controller, MessageToast, MessageBox) => {
     "use strict";
 
     return Controller.extend("zov.controller.ReadOvView", {
         //Métodos do framework[->]
         onInit: function() {
+            const oTModel = new sap.ui.model.json.JSONModel();
+
+            oTModel.setData([]);
+
+            this.getView().setModel(oTModel, "table");
         },
         //Métodos do framework[<-]
         onSearch: function () {
             const oView = this.getView();
 
-            const iOrdemId = oView.byId("ordemIdRead").getValue();
+            const iOrdemId = oView.byId("ordemIdRead")
 
-            if (iOrdemId === "") {
-                MessageToast.show("Insira uma Ordem de Venda");
+            if (iOrdemId.getValue() === "") {
+                iOrdemId.setValueState("Error");
+
+                iOrdemId.setValueStateText("Campo Obrigatório");
+
+                MessageBox.alert("Insira uma Ordem de Venda");
 
                 return;
             };
 
-            this.read(iOrdemId);
+            this.read(iOrdemId.getValue());
 
         },
 
@@ -59,6 +69,7 @@ sap.ui.define([
                     oView.byId("totalOrdemRead").setValue(oData2.TotalOrdem);
                     oView.byId("statusOrdemRead").setValue(oData2.Status);
 
+                    that.readItems(iOrdemId);
 
                     MessageToast.show("Leitura Realizada com Sucesso");
                 },
@@ -76,6 +87,18 @@ sap.ui.define([
                     };
                 }
             })
+        },
+
+        readItems: function (iOrdemId) {
+            const oView = this.getView();
+            const oModel = this.getOwnerComponent().getModel();
+            const oTModel = oView.getModel("table");
+            
+            oModel.read("/OVCabSet(" + iOrdemId + ")/toOVItem", {
+                success: function (oData2) {
+                    oTModel.setData(oData2.results);
+                },
+            });
         }
     });
 });

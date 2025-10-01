@@ -35,7 +35,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdCreateDeep" editable="false" type="Number" />
+                                <Input value="" id="ordemIdCreateDeep" editable="false" type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -94,7 +94,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>clientId}">
                             <f:fields>
-                                 <Input value="" id="clienteIdCreateDeep" type="Number"/>
+                                 <Input value="" id="clienteIdCreateDeep" type="Number" required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -102,7 +102,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalItems}">
                             <f:fields> 
-                                <Input value="" id="totalItensCreateDeep" liveChange="onChange" type="Number"/>
+                                <Input value="" id="totalItensCreateDeep" liveChange="onChange" type="Number" required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -110,7 +110,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalFreight}">
                             <f:fields>
-                                <Input value="" id="totalFreteCreateDeep" liveChange="onChange" type="Number"/>
+                                <Input value="" id="totalFreteCreateDeep" liveChange="onChange" type="Number" required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -118,7 +118,7 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderStatus}">
                             <f:fields>
-                                <Input value="" id="statusOrdemCreateDeep" />
+                                <Input value="" id="statusOrdemCreateDeep" required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>

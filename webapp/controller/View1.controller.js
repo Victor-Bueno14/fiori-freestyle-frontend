@@ -7,8 +7,6 @@ sap.ui.define([
     return Controller.extend("zov.controller.View1", {
         //Métodos do framework[->]
         onInit: function() {
-            console.log(this.getView());
-        
             const oView = this.getView();
             const oFModel = new sap.ui.model.json.JSONModel();
 
@@ -31,7 +29,18 @@ sap.ui.define([
         },
         //Métodos do framework[<-]
         onFilterReset: function () {
+            const oView = this.getView();
+            const oModel = oView.getModel("filter");
+            const oData = oModel.getData();
 
+            oData.OrdemId = "";
+            oData.ClienteId = "";
+            oData.OrdenacaoCampo = "OrdemId";
+            oData.OrdenacaoTipo = "ASC";
+
+            oModel.setData(oData);
+
+            this.onFilterSearch();
         },
 
         onFilterSearch: function () {
@@ -77,8 +86,6 @@ sap.ui.define([
             //Criando a Ordenação
             const oSort = new sap.ui.model.Sorter(oFData.OrdenacaoCampo, bDescending);
             aSorter.push(oSort);
-
-            console.log(oSort, aSorter);
 
             //Executando Filtro
             oTable.bindRows({

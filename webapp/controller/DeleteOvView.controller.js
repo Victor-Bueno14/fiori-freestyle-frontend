@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-], (Controller, MessageToast) => {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], (Controller, MessageToast, MessageBox) => {
     "use strict";
 
     return Controller.extend("zov.controller.DeleteOvView", {
@@ -13,13 +14,19 @@ sap.ui.define([
         onSearch: function () {
             const oView = this.getView();
 
-            const iOrdemId = oView.byId("ordemIdDelete").getValue();
+            const iOrdemId = oView.byId("ordemIdDelete")
 
-            if (iOrdemId === "") {
-                MessageToast.show("Insira uma Ordem de Venda");
-            } else {
-                this.read(iOrdemId);
+            if (iOrdemId.getValue() === "") {
+                iOrdemId.setValueState("Error");
+
+                iOrdemId.setValueStateText("Campo Obrigatório");
+
+                MessageBox.alert("Insira uma Ordem de Venda");
+
+                return;
             };
+
+            this.read(iOrdemId.getValue());
         },
 
         onClean: function () {

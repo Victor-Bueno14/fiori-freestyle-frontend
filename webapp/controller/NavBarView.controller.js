@@ -23,10 +23,6 @@ sap.ui.define([
             this.getRouter().navTo("RouteView1")
         },
 
-        onCreateOv: function() {
-            this.getRouter().navTo("RouteCreateOv");
-        },
-
         onCreateDeepOv: function() {
             this.getRouter().navTo("RouteCreateDeepOv");
         },

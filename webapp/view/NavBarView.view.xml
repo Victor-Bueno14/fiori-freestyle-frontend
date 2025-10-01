@@ -11,11 +11,7 @@
 
             <ToolbarSeparator/>
 
-            <Button icon="sap-icon://create" text="{i18n>createOrder}" press="onCreateOv" class="sapUiMediumMargin"/>
-
-            <ToolbarSeparator/>
-
-            <Button icon="sap-icon://create-form" text="{i18n>createOrderDeep}" press="onCreateDeepOv" class="sapUiMediumMargin"/>
+            <Button icon="sap-icon://create-form" text="{i18n>createOrder}" press="onCreateDeepOv" class="sapUiMediumMargin"/>
 
             <ToolbarSeparator/>
 

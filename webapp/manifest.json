@@ -112,13 +112,6 @@
           ]
         },
         {
-          "name": "RouteCreateOv",
-          "pattern": "criarOv",
-          "target": [
-            "TargetCreateOv"
-          ]
-        },
-        {
           "name": "RouteCreateDeepOv",
           "pattern": "criarDeepOv",
           "target": [
@@ -161,13 +154,6 @@
           "clearControlAggregation": false,
           "id": "View2",
           "name": "View2"
-        },
-        "TargetCreateOv": {
-          "viewType": "XML",
-          "transition":"slide",
-          "clearControlAggregation": false,
-          "viewId": "CreateOvView",
-          "viewName": "CreateOvView"
         },
         "TargetCreateDeepOv": {
           "viewType": "XML",

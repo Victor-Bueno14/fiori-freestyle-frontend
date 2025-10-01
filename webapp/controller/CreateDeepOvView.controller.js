@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-], (Controller, MessageToast) => {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], (Controller, MessageToast, MessageBox) => {
     "use strict";
 
     return Controller.extend("zov.controller.CreateDeepOvView", {
@@ -44,9 +45,35 @@ sap.ui.define([
         },
 
         onCreate: function () {
-            const oData = {};
-
             const oView = this.getView();
+
+            const oForm = this.byId("FormChange480_12124-2");
+
+            const aInputs = oForm.findAggregatedObjects(true, function (oControl) {
+                return oControl instanceof sap.m.Input;
+            });
+
+            let bValido = true;
+
+            aInputs.forEach(function (oInput) {
+                if (oInput.getValue() === "") {
+                    oInput.setValueState("Error");
+
+                    oInput.setValueStateText("Campo Obrigatório");
+
+                    bValido = false;
+                } else {
+                    oInput.setValueState("None");
+                }
+            });
+
+            if (!bValido) {
+                MessageBox.alert("Preencha todos os campos obrigatórios!");
+
+                return;
+            }
+            
+            const oData = {};
 
             const oModel = oView.getModel("items");
 
@@ -59,14 +86,8 @@ sap.ui.define([
             oData.TotalOrdem = oView.byId("totalOrdemCreateDeep").getValue();
             oData.Status     = oView.byId("statusOrdemCreateDeep").getValue();
 
-            if (oData.ClienteId === "" || oData.TotalItens === "" || oData.TotalFrete === "" || oData.Status === "") {
-                MessageToast.show("Preencha todos os campos!");
-
-                return;
-            }
-
-            if (oData.Status.lenght > 1) {
-                MessageToast.show("Campo Status com muitos caracteres (Máximo: 1)");
+            if (oData.Status.length > 1) {
+                MessageBox.alert("Campo Status com muitos caracteres (Máximo: 1)!");
 
                 return;
             }
@@ -74,7 +95,6 @@ sap.ui.define([
             if(oItems.QuantityItems > 0) {
                 oData.toOVItem = oItems.Items;
             };
-
 
             this.create(oData);
             
@@ -116,9 +136,35 @@ sap.ui.define([
         },
 
         onAddItem: function () {
-            const oItem = {};
-
             const oView = this.getView();
+
+            const oForm = oView.byId("FormChange480_12124-3");
+
+            const aInputs = oForm.findAggregatedObjects(true, function (oControl) {
+                return oControl instanceof sap.m.Input;
+            });
+
+            let bValido = true;
+
+            aInputs.forEach(function(oInput){
+                if (oInput.getValue() === "") {
+                    oInput.setValueState("Error");
+
+                    oInput.setValueStateText("Campo Obrigatório");
+                    
+                    bValido = false;
+                } else {
+                    oInput.setValueState("None");
+                }
+            });
+
+            if (!bValido) {
+                MessageBox.alert("Preencha Todos os Campos do Item!");
+
+                return
+            };
+
+            const oItem = {};
 
             const oModel = oView.getModel("items");
 
@@ -129,19 +175,6 @@ sap.ui.define([
             oItem.Descricao = oView.byId("descricao").getValue();
             oItem.Quantidade = parseFloat(oView.byId("quantidade").getValue());
             oItem.PrecoUni = oView.byId("precoUni").getValue();
-
-             if (
-                 oItem.ItemId === "" ||
-                 oItem.Material === "" ||
-                 oItem.Descricao === "" ||
-                 oItem.Quantidade === "" ||
-                 oItem.PrecoUni === ""
-             ) {
-                MessageToast.show("Preencha Todos os Campos do Item");
-
-                return;
-             }
-
             oItem.PrecoTot = oView.byId("precoTot").getValue();
 
             oData.Items.push(oItem);
@@ -193,7 +226,7 @@ sap.ui.define([
 
                     const oObj = JSON.parse(oError.responseText);
 
-                    MessageToast.Show(oObj.error.message.value);
+                    MessageToast.show(oObj.error.message.value);
                 }
             })
         }
