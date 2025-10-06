@@ -15,17 +15,30 @@ sap.ui.define([
             this.getView().setModel(oTModel, "table");
         },
         //Métodos do framework[<-]
+        onNavBack: function () {
+            const oHistory = sap.ui.core.routing.History.getInstance();
+            const sPreviousHash = oHistory.getPreviousHash();
+
+            if (sPreviousHash !== undefined) {
+                window.history.go(-1);
+            } else {
+                this.getRouter().navTo("RouteView1");
+            }
+        }, 
+        
         onSearch: function () {
             const oView = this.getView();
 
             const iOrdemId = oView.byId("ordemIdRead")
 
             if (iOrdemId.getValue() === "") {
+                const oI18n = oView.getModel("i18n").getResourceBundle();
+
                 iOrdemId.setValueState("Error");
 
-                iOrdemId.setValueStateText("Campo Obrigatório");
+                iOrdemId.setValueStateText(oI18n.getText("requiredField"));
 
-                MessageBox.alert("Insira uma Ordem de Venda");
+                MessageBox.alert(oI18n.getText("emptySalesOrder"));
 
                 return;
             };
@@ -50,6 +63,7 @@ sap.ui.define([
             const that = this;
             const oView = this.getView();
             const oModel = this.getOwnerComponent().getModel();
+            const oI18n = oView.getModel("i18n").getResourceBundle();
 
             oView.setBusy(true);
 
@@ -71,20 +85,13 @@ sap.ui.define([
 
                     that.readItems(iOrdemId);
 
-                    MessageToast.show("Leitura Realizada com Sucesso");
+                    MessageToast.show(oI18n.getText("readingSuccess"));
                 },
                 error: function (oError) {
                     oView.setBusy(false);
-
-                    if(oError.statusCode == 404) {
-                        MessageToast.show("Ordem de Venda Não Encontrada");
-
-                        that.onClean();
-                    } else {
                         const oObj = JSON.parse(oError.responseText);
 
                         MessageToast.show(oObj.error.message.value);
-                    };
                 }
             })
         },

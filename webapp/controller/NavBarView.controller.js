@@ -8,17 +8,6 @@ sap.ui.define([
         onInit: function() {
         },
         //Métodos do framework[<-]
-        onNavBack: function () {
-            const oHistory = sap.ui.core.routing.History.getInstance();
-            const sPreviousHash = oHistory.getPreviousHash();
-
-            if (sPreviousHash !== undefined) {
-                window.history.go(-1);
-            } else {
-                this.getRouter().navTo("RouteView1");
-            }
-        },
-
         onHome: function () {
             this.getRouter().navTo("RouteView1")
         },

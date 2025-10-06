@@ -4,7 +4,11 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:l="sap.ui.layout"
     xmlns="sap.m">
-    <Page id="page4" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+    <Page 
+        id="page4" 
+        title="{i18n>deleteSalesOrder}" 
+        showNavButton="true" 
+        navButtonPress="onNavBack">
         <mvc:XMLView viewName="zov.view.NavBarView"/>
 
         <VBox class="sapUiSmallMargin">
@@ -34,7 +38,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdDelete" type="Number" required="true"/>
+                                <Input 
+                                    value="" 
+                                    id="ordemIdDelete"
+                                    type="Number" 
+                                    required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -42,7 +50,11 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button icon="sap-icon://search" type="Emphasized" text="{i18n>search}" press="onSearch" />
+                                <Button 
+                                    icon="sap-icon://search" 
+                                    type="Emphasized" 
+                                    text="{i18n>search}" 
+                                    press="onSearch" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -77,7 +89,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>creationDate}">
                             <f:fields>
-                                <Input value="" id="dataCriacaoDelete" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="dataCriacaoDelete" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -85,7 +100,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>createdBy}">
                             <f:fields>
-                                <Input value="" id="criadoPorDelete" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="criadoPorDelete" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -93,7 +111,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>clientId}">
                             <f:fields>
-                                <Input value="" id="clienteIdDelete" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="clienteIdDelete" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -101,7 +122,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalItems}">
                             <f:fields>
-                                <Input value="" id="totalItensDelete" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="totalItensDelete" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -109,7 +133,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalFreight}">
                             <f:fields>
-                                <Input value="" id="totalFreteDelete" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="totalFreteDelete" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -117,7 +144,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalOrder}">
                             <f:fields>
-                                <Input value="" id="totalOrdemDelete" editable="false"/>
+                                <Input 
+                                    value=""
+                                    id="totalOrdemDelete" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -125,7 +155,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderStatus}">
                             <f:fields>
-                                <Input value="" id="statusOrdemDelete" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="statusOrdemDelete" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -135,8 +168,19 @@
                             <f:fields>
                                 <HBox justifyContent="End">
                                     <items>
-                                        <Button icon="sap-icon://clear-all" type="Emphasized" text="{i18n>clean}" width="10rem" class="sapUiMediumMarginEnd" press="onClean"></Button>
-                                        <Button icon="sap-icon://delete" type="Emphasized" text="{i18n>delete}" width="10rem" press="onDelete"></Button>
+                                        <Button 
+                                            icon="sap-icon://clear-all" 
+                                            type="Emphasized" 
+                                            text="{i18n>clean}" 
+                                            width="10rem" 
+                                            class="sapUiMediumMarginEnd" 
+                                            press="onClean"/>
+                                        <Button 
+                                            icon="sap-icon://delete"
+                                            type="Emphasized" 
+                                            text="{i18n>delete}" 
+                                            width="10rem" 
+                                            press="onDelete"/>
                                     </items>
                                 </HBox>
                             </f:fields>

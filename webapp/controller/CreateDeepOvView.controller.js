@@ -30,6 +30,17 @@ sap.ui.define([
             oView.setModel(oModelItens, "items");
         },
         //Métodos do framework[<-]
+        onNavBack: function () {
+            const oHistory = sap.ui.core.routing.History.getInstance();
+            const sPreviousHash = oHistory.getPreviousHash();
+
+            if (sPreviousHash !== undefined) {
+                window.history.go(-1);
+            } else {
+                this.getRouter().navTo("RouteView1");
+            }
+        },
+        
         onChange: function () {
             const oView = this.getView();
 
@@ -47,31 +58,33 @@ sap.ui.define([
         onCreate: function () {
             const oView = this.getView();
 
+            const oI18n = oView.getModel("i18n").getResourceBundle();
+
             const oForm = this.byId("FormChange480_12124-2");
 
             const aInputs = oForm.findAggregatedObjects(true, function (oControl) {
                 return oControl instanceof sap.m.Input;
             });
 
-            let bValido = true;
+            let bValid = true;
 
             aInputs.forEach(function (oInput) {
                 if (oInput.getValue() === "") {
                     oInput.setValueState("Error");
 
-                    oInput.setValueStateText("Campo Obrigatório");
+                    oInput.setValueStateText(oI18n.getText("requiredField"));
 
-                    bValido = false;
+                    bValid = false;
                 } else {
                     oInput.setValueState("None");
                 }
             });
 
-            if (!bValido) {
-                MessageBox.alert("Preencha todos os campos obrigatórios!");
+            if (!bValid) {
+                MessageBox.alert(oI18n.getText("requiredFieldMessage"));
 
                 return;
-            }
+            };
             
             const oData = {};
 
@@ -87,7 +100,7 @@ sap.ui.define([
             oData.Status     = oView.byId("statusOrdemCreateDeep").getValue();
 
             if (oData.Status.length > 1) {
-                MessageBox.alert("Campo Status com muitos caracteres (Máximo: 1)!");
+                MessageBox.alert(oI18n.getText("statusFieldError"));
 
                 return;
             }
@@ -96,8 +109,7 @@ sap.ui.define([
                 oData.toOVItem = oItems.Items;
             };
 
-            this.create(oData);
-            
+            this.create(oData);       
         },
 
         onClean: function () {
@@ -138,6 +150,8 @@ sap.ui.define([
         onAddItem: function () {
             const oView = this.getView();
 
+            const oI18n = oView.getModel("i18n").getResourceBundle();
+
             const oForm = oView.byId("FormChange480_12124-3");
 
             const aInputs = oForm.findAggregatedObjects(true, function (oControl) {
@@ -150,7 +164,7 @@ sap.ui.define([
                 if (oInput.getValue() === "") {
                     oInput.setValueState("Error");
 
-                    oInput.setValueStateText("Campo Obrigatório");
+                    oInput.setValueStateText(oI18n.getText("requiredField"));
                     
                     bValido = false;
                 } else {
@@ -159,9 +173,9 @@ sap.ui.define([
             });
 
             if (!bValido) {
-                MessageBox.alert("Preencha Todos os Campos do Item!");
+                MessageBox.alert(oI18n.getText("fillItem"));
 
-                return
+                return;
             };
 
             const oItem = {};
@@ -183,16 +197,16 @@ sap.ui.define([
 
             oModel.setData(oData);
 
-            MessageToast.show("Item Criado com Sucesso");
+            MessageToast.show(oI18n.getText("addItems"));
 
             this.onCleanItem();
-
         },
 
         create: function(oData) {
             const that = this;
             const oView = this.getView();
             const oModel = this.getOwnerComponent().getModel();
+            const oI18n = oView.getModel("i18n").getResourceBundle();
 
             oView.setBusy(true);
 
@@ -215,11 +229,11 @@ sap.ui.define([
 
                         that.onClean();
 
-                        MessageToast.show("Ordem Cadastrada com Sucesso");
+                        MessageToast.show(oI18n.getText("createdSalesOrder"));
 
                     } else {
-                        MessageToast.show("Erro no Cadastro");
-                    }
+                        MessageToast.show(oI18n.getText("errorCreateOrder"));
+                    };
                 },
                 error: function (oError) {
                     oView.setBusy(false);

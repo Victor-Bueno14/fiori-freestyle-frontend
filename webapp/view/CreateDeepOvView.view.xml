@@ -5,7 +5,11 @@
     xmlns:l="sap.ui.layout"
     xmlns:t="sap.ui.table"
     xmlns="sap.m">
-    <Page id="page5" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+    <Page 
+        id="page5" 
+        title="{i18n>createSalesOrder}" 
+        showNavButton="true" 
+        navButtonPress="onNavBack">
         <mvc:XMLView viewName="zov.view.NavBarView"/>
 
         <VBox class="sapUiSmallMargin">
@@ -35,7 +39,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdCreateDeep" editable="false" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="ordemIdCreateDeep" 
+                                    editable="false" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -43,7 +51,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>creationDate}">
                             <f:fields>
-                                <Input value="" id="dataCriacaoCreateDeep" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="dataCriacaoCreateDeep" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>     
@@ -51,7 +62,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>createdBy}">
                             <f:fields>
-                                <Input value="" id="criadoPorCreateDeep" editable="false" />
+                                <Input 
+                                    value="" 
+                                    id="criadoPorCreateDeep" 
+                                    editable="false" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -59,7 +73,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalOrder}">
                             <f:fields>
-                                <Input value="" id="totalOrdemCreateDeep" editable="false" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="totalOrdemCreateDeep" 
+                                    editable="false" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -94,7 +112,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>clientId}">
                             <f:fields>
-                                 <Input value="" id="clienteIdCreateDeep" type="Number" required="true"/>
+                                 <Input 
+                                    value="" 
+                                    id="clienteIdCreateDeep" 
+                                    type="Number" 
+                                    required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -102,7 +124,12 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalItems}">
                             <f:fields> 
-                                <Input value="" id="totalItensCreateDeep" liveChange="onChange" type="Number" required="true"/>
+                                <Input 
+                                    value="" 
+                                    id="totalItensCreateDeep" 
+                                    liveChange="onChange" 
+                                    type="Number" 
+                                    required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -110,7 +137,12 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalFreight}">
                             <f:fields>
-                                <Input value="" id="totalFreteCreateDeep" liveChange="onChange" type="Number" required="true"/>
+                                <Input 
+                                    value="" 
+                                    id="totalFreteCreateDeep" 
+                                    liveChange="onChange" 
+                                    type="Number" 
+                                    required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -118,7 +150,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderStatus}">
                             <f:fields>
-                                <Input value="" id="statusOrdemCreateDeep" required="true"/>
+                                <Input 
+                                    value="" 
+                                    id="statusOrdemCreateDeep" 
+                                    required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -126,7 +161,11 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button icon="sap-icon://clear-all" type="Emphasized" text="{i18n>clean}" press="onClean"/>
+                                <Button 
+                                    icon="sap-icon://clear-all" 
+                                    type="Emphasized" 
+                                    text="{i18n>clean}" 
+                                    press="onClean"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -134,7 +173,11 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button icon="sap-icon://create" type="Emphasized" text="{i18n>create}" press="onCreate"/>
+                                <Button 
+                                    icon="sap-icon://create" 
+                                    type="Emphasized" 
+                                    text="{i18n>create}" 
+                                    press="onCreate"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -170,7 +213,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>itemId}">
                             <f:fields>
-                                 <Input value="" id="itemId" type="Number"/>
+                                 <Input 
+                                    value="" 
+                                    id="itemId" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -178,7 +224,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>material}">
                             <f:fields> 
-                                <Input value="" id="material" placeholder="Ex.: 1000" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="material" 
+                                    placeholder="Ex.: 1000" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -186,7 +236,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>description}">
                             <f:fields>
-                                <Input value="" id="descricao" placeholder="Ex.: Mouse"/>
+                                <Input 
+                                    value="" 
+                                    id="descricao" 
+                                    placeholder="Ex.: Mouse"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -194,7 +247,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>quantity}">
                             <f:fields>
-                                <Input value=""  id="quantidade" liveChange="onChangeItem" type="Number"/>
+                                <Input 
+                                    value=""  
+                                    id="quantidade" 
+                                    liveChange="onChangeItem" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -202,7 +259,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>unitPrice}">
                             <f:fields>
-                                <Input value="" id="precoUni" liveChange="onChangeItem" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="precoUni" 
+                                    liveChange="onChangeItem" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -210,7 +271,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalPrice}">
                             <f:fields>
-                                <Input value="" id="precoTot" editable="false" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="precoTot" 
+                                    editable="false" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -230,7 +295,11 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button icon="sap-icon://decline" text="{i18n>cleanItem}" type="Emphasized" press="onCleanItem"/>
+                                <Button 
+                                    icon="sap-icon://decline" 
+                                    text="{i18n>cleanItem}" 
+                                    type="Emphasized" 
+                                    press="onCleanItem"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -238,7 +307,11 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button icon="sap-icon://add" text="{i18n>addItem}" type="Emphasized" press="onAddItem"/>
+                                <Button 
+                                    icon="sap-icon://add" 
+                                    text="{i18n>addItem}"
+                                    type="Emphasized" 
+                                    press="onAddItem"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -269,21 +342,21 @@
                 </t:Column>
 
                 <t:Column>
-                    <Label text="{i18n>Material}"/>
+                    <Label text="{i18n>material}"/>
                     <t:template>
                         <Text text="{items>Material}" wrapping="false"/>
                     </t:template>
                 </t:Column>
 
                 <t:Column>
-                    <Label text="{i18n>Description}"/>
+                    <Label text="{i18n>description}"/>
                     <t:template>
                         <Text text="{items>Descricao}" wrapping="false"/>
                     </t:template>
                 </t:Column>
 
                 <t:Column>
-                    <Label text="{i18n>Quantity}"/>
+                    <Label text="{i18n>quantity}"/>
                     <t:template>
                         <Text text="{items>Quantidade}" wrapping="false"/>
                     </t:template>

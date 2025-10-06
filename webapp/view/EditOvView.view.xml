@@ -3,8 +3,13 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form"
     xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
     xmlns="sap.m">
-    <Page id="page3" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+    <Page 
+        id="page3" 
+        title="{i18n>modifySalesOrder}" 
+        showNavButton="true" 
+        navButtonPress="onNavBack">
         <mvc:XMLView viewName="zov.view.NavBarView"/>
 
         <VBox class="sapUiSmallMargin">
@@ -34,7 +39,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderId}">
                             <f:fields>
-                                <Input value="" id="ordemIdEdit" type="Number" required="true"/>
+                                <Input 
+                                    value="" 
+                                    id="ordemIdEdit" 
+                                    type="Number" 
+                                    required="true"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -42,7 +51,11 @@
                     <f:FormContainer>
                         <f:FormElement label="">
                             <f:fields>
-                                <Button icon="sap-icon://search" type="Emphasized" text="{i18n>search}" press="onSearch" />
+                                <Button 
+                                    icon="sap-icon://search" 
+                                    type="Emphasized" 
+                                    text="{i18n>search}" 
+                                    press="onSearch" />
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -77,7 +90,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>createdBy}">
                             <f:fields>
-                                <Input value="" id="criadoPorEdit" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="criadoPorEdit" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -85,7 +101,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>clientId}">
                             <f:fields>
-                                <Input value="" id="clienteIdEdit" editable="false" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="clienteIdEdit" 
+                                    editable="false" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -93,7 +113,12 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalItems}">
                             <f:fields>
-                                <Input value="" id="totalItensEdit" editable="false" change="onChange" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="totalItensEdit" 
+                                    editable="false" 
+                                    change="onChange" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -101,7 +126,12 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalFreight}">
                             <f:fields>
-                                <Input value="" id="totalFreteEdit" editable="false" change="onChange" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="totalFreteEdit" 
+                                    editable="false" 
+                                    change="onChange" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -109,7 +139,11 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>totalOrder}">
                             <f:fields>
-                                <Input value="" id="totalOrdemEdit" editable="false" type="Number"/>
+                                <Input 
+                                    value="" 
+                                    id="totalOrdemEdit" 
+                                    editable="false" 
+                                    type="Number"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -117,7 +151,10 @@
                     <f:FormContainer>
                         <f:FormElement label="{i18n>orderStatus}">
                             <f:fields>
-                                <Input value="" id="statusOrdemEdit" editable="false"/>
+                                <Input 
+                                    value="" 
+                                    id="statusOrdemEdit" 
+                                    editable="false"/>
                             </f:fields>
                         </f:FormElement>
                     </f:FormContainer>
@@ -126,7 +163,11 @@
                 <f:FormContainer>
                     <f:FormElement label="">
                         <f:fields>
-                            <Button icon="sap-icon://clear-all" type="Emphasized" text="{i18n>clean}" press="onClean">
+                            <Button 
+                                icon="sap-icon://clear-all" 
+                                type="Emphasized" 
+                                text="{i18n>clean}" 
+                                press="onClean">
                             </Button>
                         </f:fields>
                     </f:FormElement>
@@ -135,7 +176,11 @@
                 <f:FormContainer>
                     <f:FormElement label="">
                         <f:fields>
-                            <Button icon="sap-icon://edit" type="Emphasized" text="{i18n>modify}" press="onEdit">
+                            <Button 
+                                icon="sap-icon://edit" 
+                                type="Emphasized" 
+                                text="{i18n>modify}" 
+                                press="onEdit">
                             </Button>
                         </f:fields>
                     </f:FormElement>

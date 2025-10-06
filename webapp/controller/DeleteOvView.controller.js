@@ -10,18 +10,30 @@ sap.ui.define([
         onInit: function() {
         },
         //Métodos do framework[<-]
+        onNavBack: function () {
+            const oHistory = sap.ui.core.routing.History.getInstance();
+            const sPreviousHash = oHistory.getPreviousHash();
+
+            if (sPreviousHash !== undefined) {
+                window.history.go(-1);
+            } else {
+                this.getRouter().navTo("RouteView1");
+            }
+        },
 
         onSearch: function () {
             const oView = this.getView();
+
+            const oI18n = oView.getModel("i18n").getResourceBundle();
 
             const iOrdemId = oView.byId("ordemIdDelete")
 
             if (iOrdemId.getValue() === "") {
                 iOrdemId.setValueState("Error");
 
-                iOrdemId.setValueStateText("Campo Obrigatório");
+                iOrdemId.setValueStateText(oI18n.getText("requiredField"));
 
-                MessageBox.alert("Insira uma Ordem de Venda");
+                MessageBox.alert(oI18n.getText("emptySalesOrder"));
 
                 return;
             };
@@ -47,17 +59,24 @@ sap.ui.define([
         onDelete: function () {
             const iOrdemId = this.getView().byId("ordemIdDelete").getValue();
 
+            const oI18n = this.getView().getModel("i18n").getResourceBundle();
+
             if (iOrdemId === "") {
-                MessageToast.show("Insira uma Ordem de Venda");
-            } else {
-                this.delete(iOrdemId);
-            }
+                MessageBox.alert(oI18n.getText("emptySalesOrder"));
+
+                return
+            }; 
+            
+            this.delete(iOrdemId);
 
         },
 
         read: function (iOrdemId) {
             const oView = this.getView();
+
             const oModel = this.getOwnerComponent().getModel();
+
+            const oI18n = oView.getModel("i18n").getResourceBundle();
 
             oView.setBusy(true);
 
@@ -77,25 +96,24 @@ sap.ui.define([
                     oView.byId("totalOrdemDelete").setValue(oData2.TotalOrdem);
                     oView.byId("statusOrdemDelete").setValue(oData2.Status);
 
-                    MessageToast.show("Leitura realizada com sucesso");
+                    MessageToast.show(oI18n.getText("readingSuccess"));
                 },
                 error: function (oError) {
                     oView.setBusy(false);
 
-                    if (oError.statusCode == 404) {
-                        MessageToast.show("Ordem Não Encontrada");
-                    } else {
-                        const oObj = JSON.parse(oError.responseText);
+                    const oObj = JSON.parse(oError.responseText);
 
-                        MessageToast.show(oObj.error.message.value)
-                    }
+                    MessageToast.show(oObj.error.message.value)
                 }
             })
         },
 
         delete: function (iOrdemId) {
             const oView = this.getView();
+
             const oModel = this.getOwnerComponent().getModel();
+
+            const oI18n = oView.getModel("i18n").getResourceBundle();
 
             oView.setBusy(true);
 
@@ -103,7 +121,7 @@ sap.ui.define([
                 success: function (oData2, oResponse) {
                     oView.setBusy(false);
 
-                    MessageToast.show("Ordem Deletada com Sucesso");
+                    MessageToast.show(oI18n.getText("deleteSuccess"));
                 },
                 error: function (oError) {
                     oView.setBusy(false);

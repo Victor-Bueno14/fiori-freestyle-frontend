@@ -10,18 +10,30 @@ sap.ui.define([
         onInit: function() {
         },
         //Métodos do framework[<-]
+        onNavBack: function () {
+            const oHistory = sap.ui.core.routing.History.getInstance();
+            const sPreviousHash = oHistory.getPreviousHash();
+
+            if (sPreviousHash !== undefined) {
+                window.history.go(-1);
+            } else {
+                this.getRouter().navTo("RouteView1");
+            }
+        },
 
         onSearch: function () {
             const oView = this.getView();
+
+            const oI18n = oView.getModel("i18n").getResourceBundle();
 
             const iOrdemId = oView.byId("ordemIdEdit")
 
             if (iOrdemId.getValue() === "") {
                 iOrdemId.setValueState("Error");
 
-                iOrdemId.setValueStateText("Campo Obrigatório");
+                iOrdemId.setValueStateText(oI18n.getText("requiredField"));
 
-                MessageBox.alert("Insira uma Ordem de Venda");
+                MessageBox.alert(oI18n.getText("emptySalesOrder"));
 
                 return;
             };
@@ -33,26 +45,28 @@ sap.ui.define([
         onEdit: function () {
             const oView = this.getView();
 
+            const oI18n = oView.getModel("i18n").getResourceBundle();
+
             const oForm = oView.byId("FormChange480_12122-2");
 
             const aInputs = oForm.findAggregatedObjects(true, function (oControl) {
                 return oControl instanceof sap.m.Input;
             });
 
-            let bValido = true;
+            let bValid = true;
 
             aInputs.forEach(function(oInput){
                 if (oInput.getValue() === "") {
                     oInput.setValueState("Error");
 
-                    oInput.setValueStateText("Campo Obrigatório");
+                    oInput.setValueStateText(oI18n.getText("requiredField"));
 
-                    bValido = false;
+                    bValid = false;
                 };
             });
 
-            if (!bValido) {
-                MessageBox.alert("Preencha todos os campos!");
+            if (!bValid) {
+                MessageBox.alert(oI18n.getText("requiredFieldMessage"));
 
                 return;
             };
@@ -99,7 +113,10 @@ sap.ui.define([
 
         read: function (iOrdemId) {
             const oView = this.getView();
+
             const oModel = this.getOwnerComponent().getModel();
+
+            const oI18n = oView.getModel("i18n").getResourceBundle();
 
             oView.setBusy(true);
 
@@ -127,25 +144,24 @@ sap.ui.define([
                     oTotalFreight.setEditable(true);
                     oStatus.setEditable(true);
 
-                    MessageToast.show("Ordem de Venda Encontrada com Sucesso");
+                    MessageToast.show(oI18n.getText("readingSuccess"));
                 },
                 error: function(oError) {
                     oView.setBusy(false);
 
-                    if(oError.statusCode == 404) {
-                        MessageToast.show("Ordem de Venda Não Encontrada");
-                    } else {
-                        const oObj = JSON.parse(oError.responseText);
+                    const oObj = JSON.parse(oError.responseText);
                         
-                        MessageToast.show(oObj.error.message.value);
-                    };
+                    MessageToast.show(oObj.error.message.value);
                 }
             })
         },
 
         edit: function (oData, iOrdemId) {
             const oView = this.getView();
+
             const oModel = this.getOwnerComponent().getModel();
+
+            const oI18n = oView.getModel("i18n").getResourceBundle();
             
             oView.setBusy(true);
 
@@ -160,9 +176,9 @@ sap.ui.define([
                         oView.byId("totalFreteEdit").setEditable(false);
                         oView.byId("statusOrdemEdit").setEditable(false);
 
-                        MessageToast.show("Ordem Modificada com Sucesso");
+                        MessageToast.show(oI18n.getText("modifySuccess"));
                     } else {
-                        MessageToast.show("Erro ao Atualizar a Ordem de Venda");
+                        MessageToast.show(oI18n.getText("modiftError"));
                     }
                 },
                 error: function (oError){
