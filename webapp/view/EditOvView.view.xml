@@ -187,5 +187,68 @@
                 </f:FormContainer>
             </f:Form>
         </VBox>
+
+        <Table 
+            id="editTableItems"
+            growing="true"
+            growingThreshold="10"
+            items="{table>/items}"
+        >
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="{i18n>items}"/>
+                </Toolbar>
+            </headerToolbar>
+
+            <columns>
+                <Column>
+                    <Text text="{i18n>itemId}"/>
+                </Column>
+
+                <Column>
+                    <Text text="{i18n>material}"/>
+                </Column>
+
+                <Column>
+                    <Text text="{i18n>description}"/>
+                </Column>
+
+                <Column>
+                    <Text text="{i18n>quantity}"/>
+                </Column>
+
+                <Column>
+                    <Text text="{i18n>unitPrice}"/>
+                </Column>
+
+                <Column>
+                    <Text text="{i18n>totalPrice}"/>
+                </Column>
+            </columns>
+
+                <ColumnListItem>
+                    <cells>
+                        <Input value="{table>ItemId}"/>
+                    
+                        <Input value="{table>Material}"/>
+
+                        <Input value="{table>Descricao}"/>
+
+                        <Input value="{table>Quantidade}" liveChange="onChangeQuantity"/>
+
+                        <Input value="{table>PrecoUni}" liveChange="onChangeUnitPrice"/>
+
+                        <Input value="{table>PrecoTot}" editable="false"/>
+                    </cells>
+                </ColumnListItem>
+        </Table>
+
+            <Toolbar>
+                <ToolbarSpacer />
+
+                <Button text="Modificar" press="onModify"/>
+
+                <Button text="Cancelar" press="onCancel"/>
+            </Toolbar>
     </Page>
 </mvc:View>

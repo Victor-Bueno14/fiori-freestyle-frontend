@@ -4,9 +4,9 @@
         "DataCriacao": "/Date(940330493000)/",
         "CriadoPor": "ABAP1",
         "ClienteId": 1,
-        "TotalItens": 100.00,
-        "TotalFrete": 10.00,
-        "TotalOrdem": 110.00,
+        "TotalItens": 300.00,
+        "TotalFrete": 50.00,
+        "TotalOrdem": 350.00,
         "Status": "N"
     },
     {
@@ -24,9 +24,9 @@
         "DataCriacao": "/Date(68335928000)/",
         "CriadoPor": "ABAP3",
         "ClienteId": 3,
-        "TotalItens": 200.00,
+        "TotalItens": 10.00,
         "TotalFrete": 50.00,
-        "TotalOrdem": 250.00,
+        "TotalOrdem": 60.00,
         "Status": "L"
     },
     {
@@ -34,9 +34,9 @@
         "DataCriacao": "/Date(68335928000)/",
         "CriadoPor": "ABAP2",
         "ClienteId": 4,
-        "TotalItens": 180.00,
-        "TotalFrete": 20.00,
-        "TotalOrdem": 200.00,
+        "TotalItens": 500.00,
+        "TotalFrete": 50.00,
+        "TotalOrdem": 550.00,
         "Status": "L"
     },
     {
@@ -64,9 +64,9 @@
         "DataCriacao": "/Date(68335928000)/",
         "CriadoPor": "ABAP5",
         "ClienteId": 7,
-        "TotalItens": 150.00,
-        "TotalFrete": 20.00,
-        "TotalOrdem": 170.00,
+        "TotalItens": 560.00,
+        "TotalFrete": 50.00,
+        "TotalOrdem": 610.00,
         "Status": "L"
     },
     {
@@ -74,9 +74,9 @@
         "DataCriacao": "/Date(68335928000)/",
         "CriadoPor": "ABAP2",
         "ClienteId": 2,
-        "TotalItens": 150.00,
-        "TotalFrete": 20.00,
-        "TotalOrdem": 170.00,
+        "TotalItens": 500.00,
+        "TotalFrete": 50.00,
+        "TotalOrdem": 600.00,
         "Status": "N"
     },
     {
@@ -84,9 +84,9 @@
         "DataCriacao": "/Date(68335928000)/",
         "CriadoPor": "ABAP2",
         "ClienteId": 2,
-        "TotalItens": 150.00,
-        "TotalFrete": 20.00,
-        "TotalOrdem": 170.00,
+        "TotalItens": 1000.00,
+        "TotalFrete": 0.00,
+        "TotalOrdem": 1000.00,
         "Status": "L"
     },
     {
@@ -95,8 +95,8 @@
         "CriadoPor": "ABAP3",
         "ClienteId": 3,
         "TotalItens": 200.00,
-        "TotalFrete": 20.00,
-        "TotalOrdem": 220.00,
+        "TotalFrete": 50.00,
+        "TotalOrdem": 250.00,
         "Status": "L"
     }
 ]

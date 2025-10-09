@@ -8,6 +8,16 @@ sap.ui.define([
     return Controller.extend("zov.controller.EditOvView", {
         //Métodos do framework[->]
         onInit: function() {
+            const oTModel = new sap.ui.model.json.JSONModel();
+            const oTItems = new sap.ui.model.json.JSONModel();
+
+            oTModel.setData({items:[]});
+            oTItems.setData([]);
+
+            oTItems.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
+
+            this.getView().setModel(oTModel, "table");
+            this.getView().setModel(oTItems, "teste");
         },
         //Métodos do framework[<-]
         onNavBack: function () {
@@ -66,6 +76,8 @@ sap.ui.define([
             });
 
             if (!bValid) {
+                console.log(aInputs);
+
                 MessageBox.alert(oI18n.getText("requiredFieldMessage"));
 
                 return;
@@ -111,7 +123,146 @@ sap.ui.define([
             oView.byId("totalOrdemEdit").setValue(iTotalOrdem);
         },
 
+        onChangeQuantity: function (oEvent) {
+            const oTModel = this.getView().getModel("table");
+
+            const oItems = oTModel.getData();
+
+            const oInput = oEvent.mParameters.id;
+
+            const nIndex = oInput[oInput.length - 1];
+
+            const oItem = oItems.items[nIndex];
+
+            const sQuantity = oEvent.mParameters.newValue;
+
+            const oSource = oEvent.getSource();
+
+            let bIsInteger = true;
+
+            if (sQuantity != "") {
+                bIsInteger = /^\d+$/.test(sQuantity.trim());
+            };
+
+            if (!bIsInteger) {
+                const oI18n = this.getView().getModel("i18n").getResourceBundle();
+
+                oSource.setValueState("Error");
+
+                oSource.setValueStateText(oI18n.getText("invalidValue"));
+
+                MessageBox.alert(oI18n.getText("onlyIntegerValues"));
+
+                return;
+            };
+
+            oSource.setValueState("None");
+
+            let sUnitPrice = oItem.PrecoUni;
+
+            sUnitPrice = sUnitPrice.replace(",", ".");
+
+            oItem.PrecoTot = Number(sQuantity) * Number(sUnitPrice);
+
+            oTModel.setData(oItems);
+        },
+
+        onChangeUnitPrice: function (oEvent) {
+            const oTModel = this.getView().getModel("table");
+
+            const oItems = oTModel.getData();
+
+            const oInput = oEvent.mParameters.id;
+
+            const nIndex = oInput[oInput.length - 1];
+
+            const oItem = oItems.items[nIndex];
+
+            const sQuantity = oItem.Quantidade;
+
+            let sUnitPrice = oEvent.mParameters.newValue;
+
+            sUnitPrice = sUnitPrice.replace(",", ".");
+
+            oItem.PrecoTot = Number(sQuantity) * Number(sUnitPrice);
+
+            oTModel.setData(oItems);
+        },
+
+        onModify: function () {
+            const oView = this.getView();
+
+            const oI18n = oView.getModel("i18n").getResourceBundle();
+
+            const oTable = oView.byId("editTableItems");
+
+            const aInputs = oTable.findAggregatedObjects(true, function (oControl) {
+                return oControl instanceof sap.m.Input;
+            }); 
+
+            let bValid = true;
+
+            aInputs.forEach(function (oInput, nIndex) {
+                if(!oInput.bOutput) {
+                    aInputs.splice(nIndex, 1);
+                } else if (oInput.getValue() === "") {
+                    oInput.setValueState("Error");
+
+                    oInput.setValueStateText(oI18n.getText("requiredField"));
+
+                    bValid = false;
+                };
+            });
+
+            if (aInputs.length === 0) {
+                MessageBox.alert(oI18n.getText("noItemsFound"));
+
+                return;
+            }
+
+            if (!bValid) {
+                MessageBox.alert(oI18n.getText("requiredFieldMessage"));
+
+                return;
+            };
+
+            const that = this;
+
+            const oTModel = oView.getModel("table"); 
+
+            const aItems = oTModel.getData().items;
+
+            console.log(aItems);
+
+            aItems.forEach(function (oItem) {
+                oItem.Quantidade = Number(oItem.Quantidade);
+
+                oItem.PrecoTot = String(oItem.PrecoTot);
+
+                that.editItem(oItem);
+            });
+
+        },
+
+        onCancel: function() {
+            const oView = this.getView();
+
+            const oTModel = oView.getModel("table");
+
+            const oIModel = oView.getModel("teste");
+
+            const oTable = oTModel.getData();
+
+            const oItems = oIModel.getData();
+
+            oTable.items = oItems;
+
+            oTModel.setData(oTable);
+        },
+
         read: function (iOrdemId) {
+            const that = this;
+
             const oView = this.getView();
 
             const oModel = this.getOwnerComponent().getModel();
@@ -144,6 +295,8 @@ sap.ui.define([
                     oTotalFreight.setEditable(true);
                     oStatus.setEditable(true);
 
+                    that.readItems(iOrdemId);
+
                     MessageToast.show(oI18n.getText("readingSuccess"));
                 },
                 error: function(oError) {
@@ -152,6 +305,30 @@ sap.ui.define([
                     const oObj = JSON.parse(oError.responseText);
                         
                     MessageToast.show(oObj.error.message.value);
+                }
+            })
+        },
+
+        readItems: function (iOrderId) {
+            const oView = this.getView();
+
+            const oModel = this.getOwnerComponent().getModel();
+
+            const oTModel = oView.getModel("table");
+
+            const oTItems = oView.getModel("teste");
+
+            const oData = oTModel.getData();
+
+            oModel.read("/OVCabSet(" + iOrderId + ")/toOVItem", {
+                success: function (oData2) {
+                    oData.items = JSON.parse(JSON.stringify(oData2.results));
+                    
+                    oTModel.setData(oData);
+
+                    console.log(oTModel);
+
+                    oTItems.setData(JSON.parse(JSON.stringify(oData2.results)));
                 }
             })
         },
@@ -178,7 +355,7 @@ sap.ui.define([
 
                         MessageToast.show(oI18n.getText("modifySuccess"));
                     } else {
-                        MessageToast.show(oI18n.getText("modiftError"));
+                        MessageToast.show(oI18n.getText("modifyError"));
                     }
                 },
                 error: function (oError){
@@ -189,6 +366,31 @@ sap.ui.define([
                     MessageToast.show(oObj.error.message.value);
                 }
             })
+        },
+
+        editItem: function (oItem) {
+            const oI18n = this.getView().getModel("i18n").getResourceBundle();
+
+            const oModel = this.getOwnerComponent().getModel();
+
+            oModel.setUseBatch(false);
+
+            oModel.update(
+                "/OVItemSet(OrdemId=" + oItem.OrdemId + ",ItemId=" + oItem.ItemId + ")", oItem, {                    
+                    success: function (oData2, oResponse) {       
+                        if (oResponse.statusCode == 200 || oResponse.statusCode == 204) {
+                            MessageToast.show(oI18n.getText("modifyItem"));
+                        } else {
+                            MessageBox.alert(oI18n.getText("modifyItemError"));
+                        };
+                    },
+                    error: function(oError) {
+                        const oObj = JSON.parse(oError.responseText);
+
+                        MessageToast.show(oObj.error.message.value);
+                    }
+                }
+            );
         }
     });
 });

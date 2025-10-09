@@ -8,6 +8,11 @@ sap.ui.define([
     return Controller.extend("zov.controller.DeleteOvView", {
         //Métodos do framework[->]
         onInit: function() {
+            const oTModel = new sap.ui.model.json.JSONModel();
+
+            oTModel.setData([]);
+
+            this.getView().setModel(oTModel, "table");
         },
         //Métodos do framework[<-]
         onNavBack: function () {
@@ -72,6 +77,8 @@ sap.ui.define([
         },
 
         read: function (iOrdemId) {
+            const that = this;
+
             const oView = this.getView();
 
             const oModel = this.getOwnerComponent().getModel();
@@ -96,6 +103,8 @@ sap.ui.define([
                     oView.byId("totalOrdemDelete").setValue(oData2.TotalOrdem);
                     oView.byId("statusOrdemDelete").setValue(oData2.Status);
 
+                    that.readItems(iOrdemId);
+
                     MessageToast.show(oI18n.getText("readingSuccess"));
                 },
                 error: function (oError) {
@@ -108,10 +117,28 @@ sap.ui.define([
             })
         },
 
-        delete: function (iOrdemId) {
+        readItems: function (iOrdemId) {
             const oView = this.getView();
 
             const oModel = this.getOwnerComponent().getModel();
+
+            const oTModel = oView.getModel("table");
+
+            oModel.read("/OVCabSet(" + iOrdemId + ")/toOVItem", {
+                success: function(oData2) {
+                    oTModel.setData(oData2.results);
+                }
+            })
+        },
+
+        delete: function (iOrdemId) {
+            const that = this;
+
+            const oView = this.getView();
+
+            const oModel = this.getOwnerComponent().getModel();
+
+            const oTModel = oView.getModel("table");
 
             const oI18n = oView.getModel("i18n").getResourceBundle();
 
@@ -122,6 +149,10 @@ sap.ui.define([
                     oView.setBusy(false);
 
                     MessageToast.show(oI18n.getText("deleteSuccess"));
+
+                    oTModel.setData([]);
+
+                    that.onClean();
                 },
                 error: function (oError) {
                     oView.setBusy(false);

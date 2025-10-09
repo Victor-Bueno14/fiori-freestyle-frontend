@@ -99,11 +99,19 @@ sap.ui.define([
             oData.TotalOrdem = oView.byId("totalOrdemCreateDeep").getValue();
             oData.Status     = oView.byId("statusOrdemCreateDeep").getValue();
 
+            const oInput = oView.byId("statusOrdemCreateDeep");
+
             if (oData.Status.length > 1) {
+                oInput.setValueState("Error");
+
+                oInput.setValueStateText(oI18n.getText("invalidValue"));
+
                 MessageBox.alert(oI18n.getText("statusFieldError"));
 
                 return;
             }
+
+            oInput.setValueState("None");
 
             if(oItems.QuantityItems > 0) {
                 oData.toOVItem = oItems.Items;
@@ -136,10 +144,32 @@ sap.ui.define([
         onChangeItem: function () {
             const oView = this.getView();
 
-            let iQuantity = oView.byId("quantidade").getValue();
+            const oInput = oView.byId("quantidade");
+
+            const iQuantity = oView.byId("quantidade").getValue();
+
+            let bIsInteger = true;
+
+            if (iQuantity != "") {
+                bIsInteger = /^\d+$/.test(iQuantity.trim());
+            };
+
+            if (!bIsInteger) {
+                const oI18n = oView.getModel("i18n").getResourceBundle();
+
+                oInput.setValueState("Error");
+
+                oInput.setValueStateText(oI18n.getText("invalidValue"));
+
+                MessageBox.alert(oI18n.getText("onlyIntegerValues"));
+
+                return;
+            };
+
+            oInput.setValueState("None");
+
             let iUnitPrice = oView.byId("precoUni").getValue();
 
-            iQuantity = iQuantity.replace(",", ".");
             iUnitPrice = iUnitPrice.replace(",", ".");
 
             const iTotalPrice = Number(iQuantity) * Number(iUnitPrice);

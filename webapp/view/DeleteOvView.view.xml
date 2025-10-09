@@ -3,6 +3,7 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form"
     xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
     xmlns="sap.m">
     <Page 
         id="page4" 
@@ -189,5 +190,69 @@
                 </f:formContainers>
             </f:Form>
         </VBox>
+
+        <t:Table 
+            id="tableDelete"
+            rows="{table>/}"
+            threshold="10"
+            class="sapUiSmallMargin"
+        >
+            <t:extension>
+                <OverflowToolbar style="Standard">
+                    <Title id="titleDelete" text="{i18n>items}"/>
+                </OverflowToolbar>
+            </t:extension>
+
+            <t:columns>
+                <t:Column>
+                    <Label text="{i18n>orderId}"/>
+                    <t:template>
+                        <Text text="{table>OrdemId}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>itemId}"/>
+                    <t:template>
+                        <Text text="{table>ItemId}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>material}"/>
+                    <t:template>
+                        <Text text="{table>Material}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>description}"/>
+                    <t:template>
+                        <Text text="{table>Descricao}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+                
+                <t:Column>
+                    <Label text="{i18n>quantity}"/>
+                    <t:template>
+                        <Text text="{table>Quantidade}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>unitPrice}"/>
+                    <t:template>
+                        <Text text="{table>PrecoUni}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column>
+                    <Label text="{i18n>totalPrice}"/>
+                    <t:template>
+                        <Text text="{table>PrecoTot}" wrapping="false"/>
+                    </t:template>
+                </t:Column>
+            </t:columns>
+        </t:Table>
     </Page>
 </mvc:View>
