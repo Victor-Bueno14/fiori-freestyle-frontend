@@ -12,6 +12,14 @@
 
             <ToolbarSeparator/>
 
+            <Button
+                icon="sap-icon://activity-items"
+                text="{i18n>tests}"
+                press="onTests"
+                class="sapUiMediumMargin"/>
+        
+            <ToolbarSeparator/>
+
             <Button 
                 icon="sap-icon://create-form" 
                 text="{i18n>createOrder}" 

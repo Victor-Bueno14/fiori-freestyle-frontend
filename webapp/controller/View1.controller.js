@@ -10,6 +10,7 @@ sap.ui.define([
         onInit: function() {
             const oView = this.getView();
             const oFModel = new sap.ui.model.json.JSONModel();
+            const oModel = this.getOwnerComponent().getModel();
 
             oFModel.setData({
                 "OrdemId": "",
@@ -26,7 +27,9 @@ sap.ui.define([
 
             oView.setModel(oFModel, "filter");
 
-            this.onFilterSearch();
+            oModel.metadataLoaded().then(() => {
+                this.onFilterSearch();
+            });
         },
         //Métodos do framework[<-]
         onFilterReset: function () {
@@ -99,13 +102,14 @@ sap.ui.define([
         onUpdateStatus(sStatus) {
             const oTable = this.getView().byId("table");
             const oModel = this.getOwnerComponent().getModel();
+            const oI18n = this.getView().getModel("i18n").getResourceBundle();
             const aIndex = oTable.getSelectedIndices();
             const that = this;
 
             console.log(aIndex);
 
             if (aIndex.length == 0) {
-                MessageBox.alert("Selecione uma linha!");
+                MessageBox.alert(oI18n.getText("selectLine"));
 
                 return
             };
@@ -125,12 +129,12 @@ sap.ui.define([
                             ID_STATUS: sStatus
                         },
                         success: function(){
-                            MessageToast.show("Status atualizado com sucesso!");
+                            MessageToast.show(oI18n.getText("updateStatus"));
 
                             that.onFilterSearch();
                         },
                         error: function(){
-                            MessageBox.alert("Erro ao atualizar status");
+                            MessageBox.alert(oI18n.getText("errorStatus"));
                         }
                     }
                 )
