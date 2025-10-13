@@ -1,6 +1,8 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], (Controller, MessageToast, MessageBox) => {
     "use strict";
 
     return Controller.extend("zov.controller.View1", {
@@ -93,5 +95,48 @@ sap.ui.define([
                 filters: aFilters
             });
         },
+
+        onUpdateStatus(sStatus) {
+            const oTable = this.getView().byId("table");
+            const oModel = this.getOwnerComponent().getModel();
+            const aIndex = oTable.getSelectedIndices();
+            const that = this;
+
+            console.log(aIndex);
+
+            if (aIndex.length == 0) {
+                MessageBox.alert("Selecione uma linha!");
+
+                return
+            };
+
+            this.getView().setBusy(true);
+
+            aIndex.forEach(function(iIndex) {
+                const oItem = oTable.getContextByIndex(iIndex);
+                const iOrdemId = oItem.getProperty("OrdemId");
+
+                oModel.callFunction(
+                    "/ZFI_ATUALIZA_STATUS",
+                    {
+                        method: "GET",
+                        urlParameters: {
+                            ID_ORDEMID: iOrdemId,
+                            ID_STATUS: sStatus
+                        },
+                        success: function(){
+                            MessageToast.show("Status atualizado com sucesso!");
+
+                            that.onFilterSearch();
+                        },
+                        error: function(){
+                            MessageBox.alert("Erro ao atualizar status");
+                        }
+                    }
+                )
+            });
+
+            this.getView().setBusy(false);
+        }
     });
 });

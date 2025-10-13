@@ -138,5 +138,25 @@
                 </t:Column>
             </t:columns>
         </t:Table>
+
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button 
+                    type="Emphasized"
+                    text="Fornecer"
+                    press="onUpdateStatus('L')"/>
+
+                <Button
+                    type="Emphasized"
+                    text="Faturar"
+                    press="onUpdateStatus('F')"/>
+
+                <Button 
+                    type="Negative"
+                    text="Cancelar"
+                    press="onUpdateStatus('C')"/>
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>
