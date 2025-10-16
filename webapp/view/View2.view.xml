@@ -10,5 +10,69 @@
         showNavButton="true" 
         navButtonPress="onNavBack">
         <mvc:XMLView viewName="zov.view.NavBarView"/>
+
+        <VBox class="sapUiSmallMargin">
+            <Title text="Exemplos de Formatadores"/>
+
+            <VBox class="sapUiSmallMarginTopBottom">
+                <Text text="Data: {dados>/DataCriacao} -> {
+                    path: 'dados>/DataCriacao',
+                    type: 'sap.ui.model.type.DateTime',
+                    formatOptions: {
+                        UTC:false,
+                        pattern: 'dd/MM/yyyy HH:mm:ss'
+                    } 
+                }"/>
+            </VBox>
+
+            <VBox class="sapUiSmallMarginBottom">
+                <Text text="Preço: {dados>/Preco} -> {
+                    path: 'dados>/Preco',
+                    formatter: '.formatter.formatPrice'
+                }"/>
+            </VBox>
+
+            <VBox class="sapUiSmallMarginBottom">
+            <HBox>
+                    <Text text="Preço com Moeda:"/>
+
+                    <Text text= "{
+                        parts: ['dados>/Preco', 'dados>/Moeda'],
+                        type: 'sap.ui.model.type.Currency',
+                        formatOptions: {
+                            groupingEnabled: true,
+                            groupingSeparator: '.',
+                            decimalSeparator: ',',
+                            decimals: 2,
+                            showMeasure: true
+                            }
+                        }" />
+                </HBox>
+            </VBox>
+
+            <VBox class="sapUiSmallMarginBottom">
+                <Text text="Status: {dados>/Status} -> {
+                    path: 'dados>/Status',
+                    formatter: '.formatter.formatStatus'
+                }" />
+            </VBox>
+
+            <VBox class="sapUiSmallMarginBottom">
+                <Text text="Cpf: {dados>/CPF} -> {
+                    path: 'dados>/CPF',
+                    formatter: '.formatter.formatCpf'
+                }"/>
+            </VBox>
+
+            <VBox class="sapUiSmallMarginBottom">
+                <Label text="Preço com Live Change:" labelFor="inputLiveChange"/>
+                <Input id="inputLiveChange" value="" liveChange="onChange"/> 
+            </VBox>
+
+            <VBox>
+                <Label text="Preço com Change: " labelFor="inputChange"/>
+                <Input id="inputChange" value="" change="onChange"/>
+            </VBox>
+        </VBox>
     </Page>
 </mvc:View>

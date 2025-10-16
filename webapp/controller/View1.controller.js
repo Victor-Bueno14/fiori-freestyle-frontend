@@ -116,7 +116,7 @@ sap.ui.define([
 
             this.getView().setBusy(true);
 
-            aIndex.forEach(function(iIndex) {
+            aIndex.forEach( function (iIndex) {
                 const oItem = oTable.getContextByIndex(iIndex);
                 const iOrdemId = oItem.getProperty("OrdemId");
 

@@ -144,17 +144,17 @@
                 <ToolbarSpacer />
                 <Button 
                     type="Emphasized"
-                    text="Fornecer"
+                    text="{i18n>supply}"
                     press="onUpdateStatus('L')"/>
 
                 <Button
                     type="Emphasized"
-                    text="Faturar"
+                    text="{i18n>invoice}"
                     press="onUpdateStatus('F')"/>
 
                 <Button 
-                    type="Negative"
-                    text="Cancelar"
+                    type="Reject"
+                    text="{i18n>cancel}"
                     press="onUpdateStatus('C')"/>
             </Toolbar>
         </footer>
