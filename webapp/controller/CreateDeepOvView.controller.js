@@ -1,11 +1,14 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], (Controller, MessageToast, MessageBox) => {
+    "sap/m/MessageBox",
+    "../model/formatter"
+], (Controller, MessageToast, MessageBox, formatter) => {
     "use strict";
 
     return Controller.extend("zov.controller.CreateDeepOvView", {
+        formatter: formatter,
+
         //Métodos do framework[->]
         onInit: function() {
             const oView = this.getView();
@@ -41,18 +44,61 @@ sap.ui.define([
             }
         },
         
-        onChange: function () {
+        onChangeTotal: function (oEvent) {
             const oView = this.getView();
+            const oInput = oEvent.getSource();
+
+            let sValue = oInput.getValue();
+
+            //Removendo o que não é número.
+            sValue = sValue.replace(/[^\d]/g, '');
+
+            //Removendo zero a esquerda.
+            sValue = sValue.replace(/^0+/, '');
+
+            const iLength = sValue.length;
+
+            if (iLength == 1) {
+                sValue = "0,0" + sValue;
+            } else if (iLength == 2) {
+                sValue = "0," + sValue;
+            } else if (iLength > 2) {
+                sValue = sValue.slice(0, length - 2) + "." + sValue.slice(-2);
+                sValue = formatter.formatPrice(sValue);
+            } else {
+                sValue = "";
+            }
+
+            oInput.setValue(sValue);
 
             let iTotalItems = oView.byId("totalItensCreateDeep").getValue();
             let iTotalFreight = oView.byId("totalFreteCreateDeep").getValue();
+
+            iTotalItems = iTotalItems.replace(/\./g, "");
+            iTotalFreight = iTotalFreight.replace(/\./g, "");
 
             iTotalItems = iTotalItems.replace(",", ".");
             iTotalFreight = iTotalFreight.replace(",", ".");
 
             let iTotalOrdem = Number(iTotalItems) + Number(iTotalFreight);
 
-            oView.byId("totalOrdemCreateDeep").setValue(iTotalOrdem);
+            let sTotalOrdem = String(iTotalOrdem).replace(",", ".");
+
+            sTotalOrdem = formatter.formatPrice(sTotalOrdem);
+
+            oView.byId("totalOrdemCreateDeep").setValue(sTotalOrdem);
+        },
+
+        onChangeStatus: function (oEvent) {
+            const oInput = oEvent.getSource();
+            let sValue = oInput.getValue();
+            const iLength = sValue.length;
+
+            if (iLength > 1) {
+                sValue = sValue.slice(0, 1);
+
+                oInput.setValue(sValue);
+            }
         },
 
         onCreate: function () {
@@ -94,24 +140,10 @@ sap.ui.define([
 
             oData.ClienteId  = parseFloat(oView.byId("clienteIdCreateDeep").getValue());
             oData.CriadoPor  = oView.byId("criadoPorCreateDeep").getValue();
-            oData.TotalItens = oView.byId("totalItensCreateDeep").getValue();
-            oData.TotalFrete = oView.byId("totalFreteCreateDeep").getValue();
-            oData.TotalOrdem = oView.byId("totalOrdemCreateDeep").getValue();
+            oData.TotalItens = oView.byId("totalItensCreateDeep").getValue().replace(/\./g, "").replace(",", ".");
+            oData.TotalFrete = oView.byId("totalFreteCreateDeep").getValue().replace(/\./g, "").replace(",", ".");
+            oData.TotalOrdem = oView.byId("totalOrdemCreateDeep").getValue().replace(/\./g, "").replace(",", ".");
             oData.Status     = oView.byId("statusOrdemCreateDeep").getValue();
-
-            const oInput = oView.byId("statusOrdemCreateDeep");
-
-            if (oData.Status.length > 1) {
-                oInput.setValueState("Error");
-
-                oInput.setValueStateText(oI18n.getText("invalidValue"));
-
-                MessageBox.alert(oI18n.getText("statusFieldError"));
-
-                return;
-            }
-
-            oInput.setValueState("None");
 
             if(oItems.QuantityItems > 0) {
                 oData.toOVItem = oItems.Items;
@@ -141,40 +173,50 @@ sap.ui.define([
             oView.byId("precoTot").setValue("");
         },
 
-        onChangeItem: function () {
+        onChangeItem: function (sId) {
             const oView = this.getView();
 
-            const oInput = oView.byId("quantidade");
+            if (sId == 'q') {
+                let sQuantity = oView.byId("quantidade").getValue();
 
-            const iQuantity = oView.byId("quantidade").getValue();
+                sQuantity = sQuantity.replace(/[^\d]/g, '');
+                sQuantity = sQuantity.replace(/^0+/, '');
 
-            let bIsInteger = true;
+                oView.byId("quantidade").setValue(sQuantity);
+            } else if (sId == 'u') {
+                let sUniPrice = oView.byId("precoUni").getValue();
 
-            if (iQuantity != "") {
-                bIsInteger = /^\d+$/.test(iQuantity.trim());
+                sUniPrice = sUniPrice.replace(/[^\d]/g, '');
+                sUniPrice = sUniPrice.replace(/^0+/, '');
+
+                const iLength = sUniPrice.length;
+
+                if (iLength == 1) {
+                    sUniPrice = "0,0" + sUniPrice;
+                } else if (iLength == 2) {
+                    sUniPrice = "0," + sUniPrice;
+                } else if (iLength > 2) {
+                    sUniPrice = sUniPrice.slice(0, iLength - 2) + "." + sUniPrice.slice(-2);
+
+                    sUniPrice = formatter.formatPrice(sUniPrice);
+                } else {
+                    sUniPrice = "";
+                };
+
+                oView.byId("precoUni").setValue(sUniPrice);
             };
 
-            if (!bIsInteger) {
-                const oI18n = oView.getModel("i18n").getResourceBundle();
+            const sQuantity = oView.byId("quantidade").getValue();
+            const sUniPrice = oView.byId("precoUni").getValue().replace(/\./g, '').replace(",", ".");
 
-                oInput.setValueState("Error");
+            const iTotPrice = Number(sQuantity) * Number(sUniPrice);
 
-                oInput.setValueStateText(oI18n.getText("invalidValue"));
+            let sTotPrice = String(iTotPrice);
 
-                MessageBox.alert(oI18n.getText("onlyIntegerValues"));
+            sTotPrice = formatter.formatPrice(sTotPrice);
 
-                return;
-            };
+            oView.byId("precoTot").setValue(sTotPrice);
 
-            oInput.setValueState("None");
-
-            let iUnitPrice = oView.byId("precoUni").getValue();
-
-            iUnitPrice = iUnitPrice.replace(",", ".");
-
-            const iTotalPrice = Number(iQuantity) * Number(iUnitPrice);
-
-            oView.byId("precoTot").setValue(iTotalPrice);
         },
 
         onAddItem: function () {
@@ -218,8 +260,8 @@ sap.ui.define([
             oItem.Material = oView.byId("material").getValue();
             oItem.Descricao = oView.byId("descricao").getValue();
             oItem.Quantidade = parseFloat(oView.byId("quantidade").getValue());
-            oItem.PrecoUni = oView.byId("precoUni").getValue();
-            oItem.PrecoTot = oView.byId("precoTot").getValue();
+            oItem.PrecoUni = oView.byId("precoUni").getValue().replace(/\./g, '').replace(",", ".");
+            oItem.PrecoTot = oView.byId("precoTot").getValue().replace(/\./g, '').replace(",", ".");
 
             oData.Items.push(oItem);
 
