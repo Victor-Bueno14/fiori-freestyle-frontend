@@ -51,7 +51,11 @@ sap.ui.define([
             };
 
             oInput.setValue(sValue);
-        }
+        },
         //Métodos do framework[<-]
+
+        onFooter: function() {
+            alert("Footer");
+        }
     });
 });
